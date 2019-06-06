@@ -8,7 +8,7 @@ class Pokecard extends React.Component {
         const id = this.props.img.toString().padStart(3, '0');
         const img = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
         return (
-            <div>
+            <div className="Pokecard_card">
                 <h2 className="Pokemon_Name">{this.props.name}</h2>
                 <img className="Pokemon_Img" src={img} alt={this.props.name} />
                 <p className="Pokemon_Type">Type: {this.props.type}</p>
