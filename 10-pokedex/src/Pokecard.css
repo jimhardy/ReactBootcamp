@@ -1,29 +1,43 @@
-.Pokemon_Img {
+.Pokemon-img {
     /* width: 150px; */
-    height: 95px;
+    height: 100px;
     padding-top: 0;
     padding-bottom: 0;
-    background: rgba(255, 157, 0, 0.431);
-    margin-top: 2px;
+    background-image: linear-gradient(rgba(255, 0, 0, 0.472), rgba(255, 255, 0, 0.472));
+    border-radius: 5px;
+    margin-top: 0;
     padding: 0 30px 0 30px;
 }
 
-.Pokecard_card {
+.Pokecard-card {
     /* background: rgb(202, 202, 202); */
+    width: 190px;
+    height: 270px;
+    padding-bottom: 0;
+    margin: 3rem;
+    border-radius: 10px;
     background-image: url('https://i.pinimg.com/originals/eb/4e/4c/eb4e4cb028feb998850a5957a9d1e738.png');
     background-size: cover;
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
+    box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, 0.5);
     text-align: center;
-    background-color: #f1f1f1;
-    padding: 2px;
-    width: 190px;
-    height: 270px;
+    transition: 
+    transform 100ms linear, 
+    box-shadow 100ms linear;
 }
 
-.Pokemon_Name {
-    margin-top: 3px;
-    margin-bottom: 1px;
+.Pokecard-card:hover{
+    transform: scale(1.10) translateZ(0);
+    box-shadow: 7px 10px 15px -8px rgba(0, 0, 0, 0.3);
+}
+
+.Pokemon-name {
+    margin-top: 4px;
+    margin-bottom: 2px;
+    padding-top: 2px;
+    font-size: 120%;
+}
+
+.Pokemon-data {
+    font-size: 80%;
 }

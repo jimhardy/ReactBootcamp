@@ -1,12 +1,13 @@
 // basic App component, just renders other components
 import ReactDOM from 'react-dom';
-import React from 'react';
-import Pokedex from './Pokedex';
+import React , {Component} from 'react';
+import Pokegame from './Pokegame';
+import './index.css';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
-      <Pokedex/> 
+      <Pokegame/> 
     );
   }
 }

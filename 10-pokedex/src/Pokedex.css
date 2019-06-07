@@ -1,9 +1,17 @@
-li {
-   background: rgb(202, 202, 202);
-   width: 185px;
-   height: 270px;
-   margin: 3rem;
-   display:inline-block;
-   border-radius: 10px;
+.Pokedex {
+  text-align: center;
 }
 
+.Pokedex-cards {
+   display: flex;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+}
+
+.Pokedex-winner {
+    color: #4caf50;
+}
+
+.Pokedex-loser {
+    color: #e91e63;
+}
