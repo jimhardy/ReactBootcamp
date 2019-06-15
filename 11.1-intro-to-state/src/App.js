@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import Game from './Game';
-import Rando from './Rando';
-import Button from './Button';
+// import Game from './Game';
+// import Rando from './Rando';
+// import Button from './Button';
+import NumberGame from './NumberGame';
 
 function App() {
   return (
-    <div>
-     <Rando maxNum={7000}/>
-     <Button />
+    <div className="App">
+      <NumberGame />
     </div>
   );
 }
