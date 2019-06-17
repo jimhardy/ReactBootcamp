@@ -4,20 +4,19 @@ import './Die.css';
 class Die extends Component {
     constructor(props) {
         super(props);
-        this.state = {rollValue: 1};
-        const numbers = ['' , 'one' , 'two' , 'three' , 'four' , 'five' , 'six'];
-        const rollValue = `fas fa-dice-${numbers[this.rollValue]}`;
+        this.state = {
+            rollValue: 2,
+        };
+        this.numbers = ['' , 'one' , 'two' , 'three' , 'four' , 'five' , 'six'];
+        this.link = this.getIcon();
     }
-    iconGetter = () => {
-        if(this.rollValue === 1){
-
-        }
+    getIcon = () => {
+        return`fas fa-dice-${this.numbers[this.state.rollValue]}`;
     }
-    
     render() {
         return (
             <div>
-                <i className={this.state.rollValue}></i>
+                <i className={this.link}></i>
             </div>
         );
     }
