@@ -5,18 +5,24 @@ class Die extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rollValue: 2,
+            rollValue: this.dieValue(),
+            rolling: false
         };
-        this.numbers = ['' , 'one' , 'two' , 'three' , 'four' , 'five' , 'six'];
+        this.numbers = ['', 'one', 'two', 'three', 'four', 'five', 'six'];
         this.link = this.getIcon();
     }
-    getIcon = () => {
-        return`fas fa-dice-${this.numbers[this.state.rollValue]}`;
-    }
+    dieValue = e => Math.floor(Math.random() * 6 + 1);
+    getIcon = () => `fas fa-dice-${this.numbers[this.state.rollValue]}`;
     render() {
+        if (this.state.rolling === true) {
+            this.setState({
+                rollValue: this.dieValue(),
+                rolling: false
+            });
+        }
         return (
             <div>
-                <i className={this.link}></i>
+                <i className={this.link} />
             </div>
         );
     }
