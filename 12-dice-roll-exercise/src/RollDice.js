@@ -9,18 +9,20 @@ class RollDice extends Component {
         this.state = {
             rolling: false
         };
+        this.die = React.createRef();
+        this.die2 = React.createRef();
     }
-    diceRoll = () => {
-        console.log('die roll');
-        this.setState({rolling: true})
-        console.log(this.state.rolling);
+    handleClick = () => {
+        this.die.current.diceRoll();
+        this.die2.current.diceRoll();
     };
     render() {
         // this.diceRoll();
         return (
             <div>
-                <Die rolling={this.state.rolling} />
-                <button onClick={this.diceRoll}>Roll Dice!</button>
+                <Die ref={this.die} rolling={this.state.rolling} />
+                <Die ref={this.die2} rolling={this.state.rolling} />
+                <button onClick={this.handleClick}>Roll Dice!</button>
             </div>
         );
     }
