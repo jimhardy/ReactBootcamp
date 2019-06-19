@@ -9,17 +9,33 @@
 }
 
 .rolling {
-    animation-name: spin;
+    animation-name: roll;
     animation-duration: 500ms;
     animation-iteration-count: infinite;
-    animation-timing-function: linear; 
-  }
-  
-  @keyframes spin {
-      from {
-          transform:rotate(0deg);
-      }
-      to {
-          transform:rotate(360deg);
-      }
-  }
+    animation-timing-function: linear;
+}
+
+@keyframes roll {
+    from {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+    30% {
+        transform: rotate(90deg) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+    45% {
+        transform: rotate(180deg) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+    60% {
+        transform: rotate(270deg) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+    85% {
+        transform: rotate(400deg) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+
+    to {
+        transform: rotate(360deg) translate3d(0,0,0) rotate3d(0,0,0,0);
+    }
+}
