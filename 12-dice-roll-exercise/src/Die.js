@@ -6,25 +6,30 @@ class Die extends Component {
         super(props);
         this.state = {
             rollValue: this.dieValue(),
-            rolling: false,
-            link: 'fas fa-dice-one'
+            link: 'fas fa-dice-one',
+            rolling: false
         };
         this.numbers = ['', 'one', 'two', 'three', 'four', 'five', 'six'];
-        this.link = this.getIcon();
     }
     dieValue = e => Math.floor(Math.random() * 6 + 1);
     getIcon = () => `fas fa-dice-${this.numbers[this.state.rollValue]}`;
     diceRoll = () => {
         this.setState({
             rollValue: this.dieValue(),
-            rolling: false,
-            link: this.getIcon()
+            link: this.getIcon(),
+            rolling: true
         });
-    }
+        setTimeout(() => {
+            this.setState({ rolling: false });
+        }, 500);
+    };
     render() {
+        let classes = `${this.state.link} ${
+            this.state.rolling ? 'rolling' : ''
+        } `;
         return (
-            <div>
-                <i className={this.state.link} />
+            <div className="die">
+                <i className={classes} />
             </div>
         );
     }
