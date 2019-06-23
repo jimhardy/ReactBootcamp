@@ -3,39 +3,57 @@ import LottoBall from './lottoBall';
 import './lottoGame.css';
 
 class LottoGame extends Component {
+    static defaultProps = {
+        title: 'Lotto',
+        numBalls: 6,
+        maxNum: 40
+    }
     constructor(props) {
         super(props);
         this.state = {
-            numbers: []
+            numbers: Array.from({length: this.props.numBalls})
         };
     }
+    handleClick = () => {
+        this.getValues();
+    }
+
     getValues = () => {
-        this.setState({ numbers: [] });
-        let newArr = [];
+        // this.setState({ numbers: [] });
+        // let newArr = [];
         // run randomNumber this.props.maxNum times, storing each value in array
-        for (let i = 0; i < this.props.numBalls; i++) {
-            newArr.push(this.randomNumber());
-        }
-        this.setState(this.stateSetter(newArr));
-    };
-    randomNumber = () => {
-           return Math.floor(Math.random() * this.props.maxNum);
+        // for (let i = 0; i < this.props.numBalls; i++) {
+        //     newArr.push(this.randomNumber());
+        // }
+        // use set state pattern to set numbers arr to newArr
+        // this.setState(this.stateSetter(newArr));
+
+        // solution method
+        this.setState(curState => ({
+            numbers: curState.numbers.map(
+                n => this.randomNumber()
+            )
+        }))
     };
 
-    stateSetter = (n) => {
-        return ({numbers: n});
-    }
+    randomNumber = () => {
+           return Math.floor(Math.random() * this.props.maxNum) + 1;
+    };
+
+    // stateSetter = (n) => {
+    //     return ({numbers: n});
+    // }
 
     render() {
         return (
-            <div>
-                <h1>Lottery!!</h1>
+            <div className="LottoGame">
+                <h1>{this.props.title}!!</h1>
                 <div className="LottoBalls">
                     {this.state.numbers.map(n => (
-                        <LottoBall num={[n]} />
+                        <LottoBall num={n} />
                     ))}
                 </div>
-                <button onClick={this.getValues}>Generate</button>
+                <button onClick={this.handleClick}>Generate</button>
             </div>
         );
     }
