@@ -16,24 +16,20 @@ class Flipper extends Component {
     }
 
     flipCoin = () => {
-        console.log('coin flipped');
         const flip = Math.floor(Math.random() * 2);
         if (flip === 0) {
             // heads
-            console.log('heads');
             this.setState(coin => ({
                 coinFace: this.props.heads,
                 headsCount: coin.headsCount + 1
             }));
         } else {
             // tails
-            console.log('tails');
             this.setState(coin => ({
                 coinFace: this.props.tails,
                 tailsCount: coin.tailsCount + 1
             }));
         }
-        console.log(this.state);
     };
 
     handleClick = () => {
