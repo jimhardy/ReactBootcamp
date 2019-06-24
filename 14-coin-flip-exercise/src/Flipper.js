@@ -40,7 +40,10 @@ class Flipper extends Component {
             <div>
                 <Coin img={this.state.coinFace} />
                 <button onClick={this.handleClick}>Flip Coin</button>
-                <p>Coin flipped {this.state.headsCount + this.state.tailsCount} times.</p>
+                <p>
+                    Coin flipped {this.state.headsCount + this.state.tailsCount}{' '}
+                    times.
+                </p>
                 <p>Heads: {this.state.headsCount}</p>
                 <p>Tails: {this.state.tailsCount}</p>
             </div>
