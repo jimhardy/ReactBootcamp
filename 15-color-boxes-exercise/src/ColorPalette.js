@@ -8,22 +8,15 @@ class ColorPalette extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nBoxes: 10
+            nBoxes: 18
         };
     }
     render() {
         return (
-            <div>
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
-                <ColorBox />
+            <div className="Wrapper">
+                {Array.apply(null, Array(this.state.nBoxes)).map((i)=>
+                <ColorBox className="colorBox" />)
+                }
             </div>
         );
     }

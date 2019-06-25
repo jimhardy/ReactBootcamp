@@ -1,5 +1,15 @@
 .colorBox {
-    width: 100px;
-    height:100px;
-    background-color: black;
+    width: 225px;
+    height: 225px;
+    /* display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border: 1px solid red; */
+}
+
+
+.Wrapper {
+    display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 0;
 }
