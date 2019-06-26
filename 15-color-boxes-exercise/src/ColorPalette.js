@@ -13,7 +13,7 @@ class ColorPalette extends Component {
     }
     render() {
         return (
-            <div className="Wrapper">
+            <div className="wrapper">
                 {Array.apply(null, Array(this.state.nBoxes)).map((i)=>
                 <ColorBox className="colorBox" />)
                 }
