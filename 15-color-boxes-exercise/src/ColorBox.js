@@ -1,34 +1,20 @@
 import React, { Component } from 'react';
 import './ColorBox.css';
-import { randomValue } from './helpers';
 
 class ColorBox extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            color: `rgb(${randomValue(255)} , ${randomValue(
-                255
-            )} , ${randomValue(255)})`
-        };
+       this.state = {};
     }
 
-    colorChanger = () => {
-        console.log('change color');
-        this.setState(currSt => ({
-            color: `rgb(${randomValue(255)} , ${randomValue(
-                255
-            )} , ${randomValue(255)})`
-        }));
-    };
-
-    handleClick = () => {
-        this.colorChanger();
+    handleClick = (e) => {
+        this.props.colorChanger(this.props.value);
     };
 
     render() {
         return (
             <div
-                style={{ backgroundColor: this.state.color }}
+                style={{ backgroundColor: this.props.color }}
                 className="colorBox"
                 onClick={this.handleClick}
             />
