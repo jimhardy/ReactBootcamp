@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
-import {randomValue} from './helpers';
+import {randomValue , randomIndex} from './helpers';
 
 class ColorPalette extends Component {
     static defaultProps = {
-        static: null
+        static: null,
+        colors: ['red' , 'green' , 'blue' , 'yellow' , 'purple' , 'black' , 'white']
     };
     constructor(props) {
         super(props);
@@ -13,26 +14,24 @@ class ColorPalette extends Component {
         };
     }
 
-    colorChanger = () => {
+    colorChanger = (e) => {
         console.log('change color function from parent');
+        const index = randomIndex(this.props.colors) ;
+        console.log(index);
         this.setState(currSt => ({
-            color: `rgb(${randomValue(255)} , ${randomValue(
-                255
-            )} , ${randomValue(255)})`
+            color: currSt.index
         }));
     };
     render() {
    
         return (
             <div className="wrapper">
-                {Array.apply(null, Array(this.state.nBoxes)).map(i => (
+                {this.props.colors.map(i => (
                     <ColorBox
                         value={i}
                         colorChanger={this.colorChanger}
                         className="colorBox"
-                        color={`rgb(${randomValue(255)} , ${randomValue(
-                            255
-                        )} , ${randomValue(255)})`}
+                        color={i}
                     />
                 ))}
             </div>
