@@ -10,29 +10,38 @@ import img5 from './5.jpg';
 import img6 from './6.jpg';
 
 class Hangman extends Component {
-    /** by default, allow 6 guesses and use provided gallows images. */
-    static defaultProps = {
-        maxWrong: 6,
-        images: [img0, img1, img2, img3, img4, img5, img6],
-        altText: [
-            'All looking good here...',
-            'Just the head',
-            'Head and body',
+  /** by default, allow 6 guesses and use provided gallows images. */
+  static defaultProps = {
+    maxWrong: 6,
+    images: [img0, img1, img2, img3, img4, img5, img6],
+    altText: [
+      'All looking good here...',
+      'Just the head',
+      'Head and body',
             'Right arm added',
             'Both arms!',
             'Right Leg',
             'Full Bod'
-        ]
-    };
-
+          ]
+        };
+        
     constructor(props) {
-        super(props);
-        this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
-        this.handleGuess = this.handleGuess.bind(this);
-    }
-
-    /** guessedWord: show current-state of word:
-   if guessed letters are {a,p,e}, show "app_e" for "apple"
+      super(props);
+      this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
+      this.handleGuess = this.handleGuess.bind(this);
+        // this.resetButton = this.resetButton.bind(this);
+      }
+      
+      resetButton = () => { // switched to arrow function instead of bind
+          this.setState(st => ({
+              nWrong: 0,
+              guessed: new Set(),
+              answer: randomWord()
+          }));
+      }
+      
+      /** guessedWord: show current-state of word:
+       if guessed letters are {a,p,e}, show "app_e" for "apple"
    */
     guessedWord() {
         return this.state.answer
@@ -45,37 +54,38 @@ class Hangman extends Component {
     - if not in answer, increase number-wrong guesses
   */
     handleGuess(evt) {
+
         let ltr = evt.target.value;
         this.setState(st => ({
             guessed: st.guessed.add(ltr),
             nWrong: st.nWrong + (st.answer.includes(ltr) ? 0 : 1)
         }));
-        console.log(this.state.nWrong);
+        console.log(this.state.guessed);
     }
 
     /** generateButtons: return array of letter buttons to render */
     generateButtons() {
-        return 'abcdefghijklmnopqrstuvwxyz'.split('').map((ltr, idx) => (
+        return 'abcdefghijklmnopqrstuvwxyz'.split('').map(ltr => (
             <button
                 value={ltr}
                 onClick={this.handleGuess}
                 disabled={this.state.guessed.has(ltr)}
-                key={idx}
-                alt={ltr}
+                key={ltr}
+                alt={'letter ' + ltr}
             >
                 {ltr}
             </button>
         ));
     }
 
-    resetButton() {
-      this.setState(st => ({
-        nWrong: 0, guessed: new Set(), answer: randomWord()
-      }));
-    }
 
     /** render: render game */
     render() {
+        let gameOver = this.state.nWrong >= this.props.maxWrong;
+        let isWinner = this.guessedWord().join('') === this.state.answer;
+        let gameState = this.generateButtons();
+        if(isWinner) gameState = <h2>YOU WIN!!</h2>;
+        if(gameOver) gameState = 'You Lose';
         return (
             <div className="Hangman">
                 <h1>Hangman</h1>
@@ -83,19 +93,16 @@ class Hangman extends Component {
                     src={this.props.images[this.state.nWrong]}
                     alt={this.props.altText[this.state.nWrong]}
                 />
-                {this.state.nWrong >= this.props.maxWrong ? (
-                    <div>
-                        <p>YOU LOSE!</p>
-                        <p>The correct word was {this.state.answer}</p>
-                    </div>
-                ) : (
-                    <div>
-                        <p>Number wrong: {this.state.nWrong}</p>
-                        <p className="Hangman-word">{this.guessedWord()}</p>
-                        <p className="Hangman-btns">{this.generateButtons()}</p>
-                    </div>
-                )}
-                <button onClick={this.resetButton}>Reset?</button>
+                <p>Wrong guesses: {this.state.nWrong}</p>
+                <p className="Hangman-word">
+                    {!gameOver ? this.guessedWord() : this.state.answer}
+                </p>
+                <p className="Hangman-btns">
+                   {gameState}
+                </p>
+                <button id="Hangman-reset" onClick={this.resetButton}>
+                    Reset?
+                </button>
             </div>
         );
     }
