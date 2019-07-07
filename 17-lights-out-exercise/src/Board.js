@@ -1,100 +1,98 @@
 import React, { Component } from 'react';
 import Cell from './Cell';
 import './Board.css';
-
-/** Game board of Lights out.
- *
- * Properties:
- *
- * - nrows: number of rows of board
- * - ncols: number of cols of board
- * - chanceLightStartsOn: float, chance any cell is lit at start of game
- *
- * State:
- *
- * - hasWon: boolean, true when board is all off
- * - board: array-of-arrays of true/false
- *
- *    For this board:
- *       .  .  .
- *       O  O  .     (where . is off, and O is on)
- *       .  .  .
- *
- *    This would be: [[f, f, f], [t, t, f], [f, f, f]]
- *
- *  This should render an HTML table of individual <Cell /> components.
- *
- *  This doesn't handle any clicks --- clicks are on individual cells
- *
- **/
+import { trueFalse } from './helpers';
 
 class Board extends Component {
     static defaultProps = {
         nrows: 6,
-        ncols: 6
-        // chanceLightStartsOn: 0.1
+        ncols: 6,
+        chanceLightStartsOn: 3
     };
 
     constructor(props) {
         super(props);
 
-        // TODO: set initial state
+        // set initial state
         this.state = {
             hasWon: false,
-            board: this.createBoard()
+            board: this.createBoard(),
+            moves: 0
         };
     }
 
-    /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
+    resetButton = () => {
+        this.setState(st => ({
+            hasWon: false,
+            board: this.createBoard(),
+            moves: 0
+        }));
+    };
 
     createBoard = () => {
         // create array-of-arrays of true/false values
-        return Array(this.props.nrows)
+        let board = Array(this.props.nrows)
             .fill()
-            .map(() => Array(this.props.ncols).fill(false));
+            .map(() =>
+                // Array(this.props.ncols).fill(false)
+                Array.from({ length: this.props.ncols }, () =>
+                    trueFalse(this.props.chanceLightStartsOn)
+                )
+            );
+
+        return board;
+
+        // for testing win logic
+        // return [
+        //   [false , false , false , false , false , false],
+        //   [false , false , false , false , true , false],
+        //   [false , false , false , true , true , true],
+        //   [false , false , false , false , true , false],
+        //   [false , false , false , false , false , false],
+        //   [false , false , false , false , false , false]
+        // ]
     };
 
-    /** handle changing a cell: update board & determine if winner */
-
+    //  handle changing a cell: update board & determine if winner
     flipCellsAround = coord => {
-        console.log(coord);
         let { ncols, nrows } = this.props;
         let board = this.state.board;
 
         let [y, x] = coord.split('-').map(Number);
         let hasWon = this.state.hasWon;
+        let moves = this.state.moves;
 
         function flipCell(y, x) {
             // if this coord is actually on board, flip it
             if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-                console.log(y, x);
                 board[y][x] = !board[y][x];
                 // flip this cell and the cells around it
-                y >= 0 && (board[y - 1][x] = !board[y - 1][x]);
+                y > 0 && (board[y - 1][x] = !board[y - 1][x]);
                 y < ncols - 1 && (board[y + 1][x] = !board[y + 1][x]);
-                x >= 0 && (board[y][x - 1] = !board[y][x - 1]);
+                x > 0 && (board[y][x - 1] = !board[y][x - 1]);
                 x < nrows - 1 && (board[y][x + 1] = !board[y][x + 1]);
             }
         }
         flipCell(y, x);
-
-        // win when every cell is turned off
-        // TODO: determine is the game has been won
         // if every value in array is false then win
-        // hasWon = board.map(rows =>
-        //     rows.every((row) => {
-        //         return row === false
-        //     })
-        // );
-hasWon = board.every((cell) => {
-  return cell === false;
-})
-
-        console.log(hasWon);
-        this.setState({ board, hasWon });
+        hasWon = this.hasWonCheck(board);
+        // increment moves counter
+        moves = moves + 1;
+        this.setState({ board, hasWon, moves });
     };
 
-    // TODO
+    hasWonCheck = arr => {
+        return arr
+            .map(rows =>
+                rows.every(row => {
+                    return row === false;
+                })
+            )
+            .every(cell => {
+                return cell;
+            });
+    };
+
     // make table board
     renderBoard = () => {
         return this.state.board.map((row, yCoord) => (
@@ -111,14 +109,21 @@ hasWon = board.every((cell) => {
         ));
     };
 
-    /** Render game board or winning message. */
     render() {
         // if the game is won, just show a winning msg & render nothing else
-
         return (
-            <table>
-                <tbody>{this.renderBoard()}</tbody>
-            </table>
+            <div>
+                <h1>Lights Off!</h1>
+                <h2>Total Moves: {this.state.moves}</h2>
+                {this.state.hasWon ? (
+                    <h1>YOU WIN</h1>
+                ) : (
+                    <table>
+                        <tbody>{this.renderBoard()}</tbody>
+                    </table>
+                )}
+                <button onClick={this.resetButton}>Restart</button>
+            </div>
         );
     }
 }
