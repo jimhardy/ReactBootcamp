@@ -112,8 +112,7 @@ class Board extends Component {
     };
 
     render() {
-        // if the game is won, just show a winning msg & render nothing else
-        let {board} = this.state;
+        // if the game is won, just show a winning msg 
         return (
             <div>
                 <h1>Lights Out!</h1>
@@ -122,7 +121,7 @@ class Board extends Component {
                     <h1>YOU WIN</h1>
                 ) : (
                     <table className="Board">
-                      {board ? <tbody>{this.renderBoard()}</tbody> : <h1>loading..</h1>}
+                      {this.state.board ? <tbody>{this.renderBoard()}</tbody> : <h1>loading..</h1>}
                     </table>
                 )}
                 <h3 className="Restart" onClick={this.resetButton}>Restart?</h3>
