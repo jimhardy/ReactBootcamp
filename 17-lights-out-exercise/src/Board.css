@@ -1,3 +1,18 @@
 .Board {
   margin: 0 auto;
 }
+
+h1 {
+    text-shadow: 0 0 10px rgb(255, 41, 41);
+}
+
+.Restart {
+  color: #fff;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.Restart:hover {
+  text-shadow: 0 0 10px rgb(255, 244, 96);
+  cursor: pointer;
+}

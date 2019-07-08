@@ -31,9 +31,9 @@ class Board extends Component {
 
     createBoard = () => {
         // create array-of-arrays of true/false values
-        // let board;
-        // do {
-            let board = Array(this.props.nrows)
+        let board;
+        do {
+            board = Array(this.props.nrows)
                 .fill()
                 .map(() =>
                     // Array(this.props.ncols).fill(false)
@@ -41,8 +41,7 @@ class Board extends Component {
                         trueFalse(this.props.chanceLightStartsOn)
                     )
                 );
-            console.log(this.hasWonCheck(board));
-        // } while (this.hasWonCheck(board));
+        } while (this.hasWonCheck(board));
         return board;
 
         // for testing win logic
@@ -114,18 +113,19 @@ class Board extends Component {
 
     render() {
         // if the game is won, just show a winning msg & render nothing else
+        let {board} = this.state;
         return (
             <div>
-                <h1>Lights Off!</h1>
+                <h1>Lights Out!</h1>
                 <h2>Total Moves: {this.state.moves}</h2>
                 {this.state.hasWon ? (
                     <h1>YOU WIN</h1>
                 ) : (
-                    <table>
-                        <tbody>{this.renderBoard()}</tbody>
+                    <table className="Board">
+                      {board ? <tbody>{this.renderBoard()}</tbody> : <h1>loading..</h1>}
                     </table>
                 )}
-                <button onClick={this.resetButton}>Restart</button>
+                <h3 className="Restart" onClick={this.resetButton}>Restart?</h3>
             </div>
         );
     }

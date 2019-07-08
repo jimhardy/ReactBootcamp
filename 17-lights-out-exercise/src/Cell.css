@@ -1,10 +1,17 @@
 .Cell {
-  height: 50px;
-  width: 50px;
-  background-color: darkgray;
-  border: 2px solid black;
+    height: 50px;
+    width: 50px;
+    background-color: darkgray;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 255, 255);
 }
 
 .Cell-lit {
-  background-color: white;
+    background-color: rgb(255, 244, 96);
+    box-shadow: 0 0 10px rgb(255, 244, 96), inset 0 0 20px rgb(255, 154, 21);
+    /* box-shadow: inset 0 0 15px rgb(255, 154, 21); */
+}
+
+.Cell:hover {
+  cursor: pointer;
 }
