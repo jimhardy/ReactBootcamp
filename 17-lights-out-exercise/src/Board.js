@@ -31,15 +31,18 @@ class Board extends Component {
 
     createBoard = () => {
         // create array-of-arrays of true/false values
-        let board = Array(this.props.nrows)
-            .fill()
-            .map(() =>
-                // Array(this.props.ncols).fill(false)
-                Array.from({ length: this.props.ncols }, () =>
-                    trueFalse(this.props.chanceLightStartsOn)
-                )
-            );
-
+        // let board;
+        // do {
+            let board = Array(this.props.nrows)
+                .fill()
+                .map(() =>
+                    // Array(this.props.ncols).fill(false)
+                    Array.from({ length: this.props.ncols }, () =>
+                        trueFalse(this.props.chanceLightStartsOn)
+                    )
+                );
+            console.log(this.hasWonCheck(board));
+        // } while (this.hasWonCheck(board));
         return board;
 
         // for testing win logic
