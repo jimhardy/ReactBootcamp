@@ -5,9 +5,10 @@ import { trueFalse } from './helpers';
 
 class Board extends Component {
     static defaultProps = {
-        nrows: 6,
-        ncols: 6,
-        chanceLightStartsOn: 3
+        nrows: 5,
+        ncols: 5,
+        chanceLightStartsOn: 5
+
     };
 
     constructor(props) {
@@ -68,14 +69,15 @@ class Board extends Component {
             // if this coord is actually on board, flip it
             if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
                 board[y][x] = !board[y][x];
-                // flip this cell and the cells around it
-                y > 0 && (board[y - 1][x] = !board[y - 1][x]);
-                y < ncols - 1 && (board[y + 1][x] = !board[y + 1][x]);
-                x > 0 && (board[y][x - 1] = !board[y][x - 1]);
-                x < nrows - 1 && (board[y][x + 1] = !board[y][x + 1]);
             }
         }
+        // flip cell and cells surrounding cell
         flipCell(y, x);
+        flipCell(y, x - 1);
+        flipCell(y, x + 1);
+        flipCell(y - 1, x);
+        flipCell(y + 1, x);
+
         // if every value in array is false then win
         hasWon = this.hasWonCheck(board);
         // increment moves counter
