@@ -8,7 +8,6 @@ class Board extends Component {
         nrows: 5,
         ncols: 5,
         chanceLightStartsOn: 5
-
     };
 
     constructor(props) {
@@ -45,15 +44,6 @@ class Board extends Component {
         } while (this.hasWonCheck(board));
         return board;
 
-        // for testing win logic
-        // return [
-        //   [false , false , false , false , false , false],
-        //   [false , false , false , false , true , false],
-        //   [false , false , false , true , true , true],
-        //   [false , false , false , false , true , false],
-        //   [false , false , false , false , false , false],
-        //   [false , false , false , false , false , false]
-        // ]
     };
 
     //  handle changing a cell: update board & determine if winner
@@ -114,19 +104,28 @@ class Board extends Component {
     };
 
     render() {
-        // if the game is won, just show a winning msg 
+        // if the game is won, just show a winning msg
         return (
             <div>
-                <h1>Lights Out!</h1>
-                <h2>Total Moves: {this.state.moves}</h2>
+                <div className="container">
+                    <span className="neon">Lights</span>
+                    <span className="flux">Out</span>
+                </div>
+                <h4>Total Moves: {this.state.moves}</h4>
                 {this.state.hasWon ? (
-                    <h1>YOU WIN</h1>
+                    <h1 className="flux">YOU WIN</h1>
                 ) : (
                     <table className="Board">
-                      {this.state.board ? <tbody>{this.renderBoard()}</tbody> : <h1>loading..</h1>}
+                        {this.state.board ? (
+                            <tbody>{this.renderBoard()}</tbody>
+                        ) : (
+                            <h1>loading..</h1>
+                        )}
                     </table>
                 )}
-                <h3 className="Restart" onClick={this.resetButton}>Restart?</h3>
+                <h3 id="Restart" className="flux" onClick={this.resetButton}>
+                    Restart?
+                </h3>
             </div>
         );
     }
