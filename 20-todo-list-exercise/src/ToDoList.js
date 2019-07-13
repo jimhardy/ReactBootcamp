@@ -33,8 +33,12 @@ class ToDoList extends Component {
 
     removeToDo = evt => {
         // used in item - remove todo
-        console.log('remove todo');
-        console.log(evt);
+        const newArr = this.state.toDos.filter(todo => {
+            return todo.id !== evt;
+        };
+        this.setState(currState => ({
+            toDos: newArr
+        }));
     };
 
     render() {

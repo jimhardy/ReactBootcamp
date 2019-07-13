@@ -8,7 +8,7 @@ class ToDoItem extends Component {
             <div>
                 <p>
                     {this.props.toDo}
-                    <span> (ADD)</span>
+                    <span> (AMEND)</span>
                     <span> (DELETE)</span>
                 </p>
             </div>
