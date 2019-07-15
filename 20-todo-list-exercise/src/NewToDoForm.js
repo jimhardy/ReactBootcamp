@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 class NewToDoForm extends Component {
     state = {
-        toDo: '',
+        toDo: this.props.toDo,
+        search: this.props.search,
     };
 
     handleChange = evt => {
@@ -12,7 +13,7 @@ class NewToDoForm extends Component {
 
     handleSubmit = evt => {
         evt.preventDefault();
-        this.props.addToDo(this.state);
+        this.props.saveToDo(this.state);
         this.setState({
             toDo: '',
         });

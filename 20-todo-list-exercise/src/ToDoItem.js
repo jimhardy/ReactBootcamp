@@ -1,10 +1,16 @@
 // item with amend, delete, and mark complete functions (mark complete prob just a class)
 import React, { Component } from 'react';
+import NewToDoForm from './NewToDoForm';
 
 class ToDoItem extends Component {
     state = {
         complete: false,
-        amending: false,
+        amending: this.props.amending,
+        toDo: this.props.value,
+    };
+
+    handleChange = evt => {
+        this.setState({ [evt.target.name]: evt.target.value });
     };
 
     handleAmend = evt => {
@@ -18,25 +24,18 @@ class ToDoItem extends Component {
         this.props.removeToDo(this.props.id);
     };
 
-    handleSubmit = evt => {
-        evt.preventDefault();
-        this.props.saveToDo(this.state);
-        this.setState({
-            amending: false,
-        });
-    };
-
     render() {
         return (
             <div>
                 {this.state.amending ? (
-                    <span>
-                        {' '}
-                        <input type="text" value={this.props.value} /> (SAVE)
-                    </span>
+                    <NewToDoForm
+                        saveToDo={this.props.amendToDo}
+                        toDo={this.state.toDo}
+                        search={this.props.search}
+                    />
                 ) : (
                     <p>
-                        {this.props.value}
+                        {this.state.toDo}
                         <span onClick={this.handleAmend}> (AMEND)</span>
                         <span onClick={this.handleDelete}> (DELETE)</span>
                     </p>
