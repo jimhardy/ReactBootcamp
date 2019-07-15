@@ -18,6 +18,14 @@ class ToDoItem extends Component {
         this.props.removeToDo(this.props.id);
     };
 
+    handleSubmit = evt => {
+        evt.preventDefault();
+        this.props.saveToDo(this.state);
+        this.setState({
+            amending: false,
+        });
+    };
+
     render() {
         return (
             <div>

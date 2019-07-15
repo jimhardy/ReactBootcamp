@@ -17,7 +17,7 @@ class ToDoList extends Component {
         ],
     };
 
-    addToDo = evt => {
+    saveToDo = evt => {
         // used in form - add new todo
         const newToDo = { ...evt, id: uuid() };
         this.setState(currState => ({
@@ -52,9 +52,10 @@ class ToDoList extends Component {
                         removeToDo={this.removeToDo}
                         key={item.id}
                         id={item.id}
+                        addToDo={this.saveToDo}
                     />
                 ))}
-                <NewToDoForm addToDo={this.addToDo} />
+                <NewToDoForm addToDo={this.saveToDo} />
             </div>
         );
     }
