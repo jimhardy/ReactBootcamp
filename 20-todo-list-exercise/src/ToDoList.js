@@ -35,9 +35,9 @@ class ToDoList extends Component {
         // used in item - remove todo
         const newArr = this.state.toDos.filter(todo => {
             return todo.id !== evt;
-        };
+        });
         this.setState(currState => ({
-            toDos: newArr
+            toDos: newArr,
         }));
     };
 
@@ -47,11 +47,11 @@ class ToDoList extends Component {
                 <h1>To Do List</h1>
                 {this.state.toDos.map(item => (
                     <ToDoItem
-                        toDo={item.toDo}
+                        value={item.toDo}
                         amendToDo={this.amendToDo}
                         removeToDo={this.removeToDo}
                         key={item.id}
-                        value={item.id}
+                        id={item.id}
                     />
                 ))}
                 <NewToDoForm addToDo={this.addToDo} />

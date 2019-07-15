@@ -27,7 +27,7 @@ class NewToDoForm extends Component {
                     value={this.state.toDo}
                     onChange={this.handleChange}
                 />
-                <button>Add!</button>
+                <button>Save</button>
             </form>
         );
     }

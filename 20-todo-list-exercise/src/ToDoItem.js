@@ -2,15 +2,37 @@
 import React, { Component } from 'react';
 
 class ToDoItem extends Component {
-    state = { complete: false };
+    state = {
+        complete: false,
+        amending: false,
+    };
+
+    handleAmend = evt => {
+        this.setState(currState => ({
+            amending: true,
+        }));
+    };
+
+    handleDelete = evt => {
+        console.log(evt);
+        this.props.removeToDo(this.props.id);
+    };
+
     render() {
         return (
             <div>
-                <p>
-                    {this.props.toDo}
-                    <span> (AMEND)</span>
-                    <span> (DELETE)</span>
-                </p>
+                {this.state.amending ? (
+                    <span>
+                        {' '}
+                        <input type="text" value={this.props.value} /> (SAVE)
+                    </span>
+                ) : (
+                    <p>
+                        {this.props.value}
+                        <span onClick={this.handleAmend}> (AMEND)</span>
+                        <span onClick={this.handleDelete}> (DELETE)</span>
+                    </p>
+                )}
             </div>
         );
     }
