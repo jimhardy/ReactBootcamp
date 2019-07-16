@@ -28,6 +28,7 @@ class NewToDoForm extends Component {
                     name="toDo"
                     value={this.state.toDo}
                     onChange={this.handleChange}
+                    placeholder="To Do...."
                 />
                 {this.state.toDo !== '' ? <button>Save</button> : null}
             </form>
