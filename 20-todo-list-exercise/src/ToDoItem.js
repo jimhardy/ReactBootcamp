@@ -9,14 +9,19 @@ class ToDoItem extends Component {
         toDo: this.props.value,
     };
 
-    handleChange = evt => {
-        this.setState({ [evt.target.name]: evt.target.value });
-    };
-
     handleAmend = evt => {
         this.setState(currState => ({
             amending: true,
         }));
+    };
+
+    handleSaveAmend = evt => {
+        console.log(evt.toDo);
+        this.setState(currState => ({
+            amending: false,
+            toDo: evt.toDo,
+        }));
+        // need to update state of original array
     };
 
     handleDelete = evt => {
@@ -29,9 +34,8 @@ class ToDoItem extends Component {
             <div>
                 {this.state.amending ? (
                     <NewToDoForm
-                        saveToDo={this.props.amendToDo}
+                        saveToDo={this.handleSaveAmend}
                         toDo={this.state.toDo}
-                        search={this.props.search}
                     />
                 ) : (
                     <p>

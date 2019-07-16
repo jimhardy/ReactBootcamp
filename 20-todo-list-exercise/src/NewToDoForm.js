@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class NewToDoForm extends Component {
     state = {
         toDo: this.props.toDo,
-        search: this.props.search,
     };
 
     handleChange = evt => {

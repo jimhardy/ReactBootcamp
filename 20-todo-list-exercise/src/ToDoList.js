@@ -25,18 +25,6 @@ class ToDoList extends Component {
         }));
     };
 
-    amendToDo = evt => {
-        // used in item - amend todo
-        const index = this.state.toDos.indexOf(evt.search);
-        let newArr = this.state.toDos;
-        newArr[index] = { toDo: evt.toDo, id: evt.search.id, amending: false };
-        console.log(newArr);
-        this.setState(currState => ({
-            toDos: newArr,
-        }));
-        console.log(this.state.toDos);
-    };
-
     removeToDo = evt => {
         // used in item - remove todo
         const newArr = this.state.toDos.filter(todo => {
