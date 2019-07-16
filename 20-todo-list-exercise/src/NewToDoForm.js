@@ -12,10 +12,12 @@ class NewToDoForm extends Component {
 
     handleSubmit = evt => {
         evt.preventDefault();
-        this.props.saveToDo(this.state);
-        this.setState({
-            toDo: '',
-        });
+        if (this.state.toDo !== '') {
+            this.props.saveToDo(this.state);
+            this.setState({
+                toDo: '',
+            });
+        }
     };
 
     render() {
@@ -27,7 +29,7 @@ class NewToDoForm extends Component {
                     value={this.state.toDo}
                     onChange={this.handleChange}
                 />
-                <button>Save</button>
+                {this.state.toDo !== '' ? <button>Save</button> : null}
             </form>
         );
     }
