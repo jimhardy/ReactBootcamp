@@ -25,6 +25,18 @@ class ToDoList extends Component {
         }));
     };
 
+    saveAmend = evt => {
+        let newArr = [...this.state.toDos];
+        const target = newArr.filter(todo => {
+            return todo.id === evt.id;
+        });
+        const index = newArr.indexOf(target[0]);
+        newArr[index] = evt;
+        this.setState(currState => ({
+            toDos: newArr,
+        }));
+    };
+
     removeToDo = evt => {
         // used in item - remove todo
         const newArr = this.state.toDos.filter(todo => {
@@ -47,6 +59,7 @@ class ToDoList extends Component {
                         key={item.id}
                         id={item.id}
                         saveToDo={this.saveToDo}
+                        saveAmend={this.saveAmend}
                         search={item}
                     />
                 ))}

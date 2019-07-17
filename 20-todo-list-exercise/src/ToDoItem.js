@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import NewToDoForm from './NewToDoForm';
 
 class ToDoItem extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSaveAmend = this.handleSaveAmend.bind(this);
+    }
     state = {
         complete: false,
         amending: this.props.amending,
+        id: this.props.id,
         toDo: this.props.value,
     };
 
@@ -15,14 +20,14 @@ class ToDoItem extends Component {
         }));
     };
 
-    handleSaveAmend = evt => {
-        console.log(evt.toDo);
-        this.setState(currState => ({
+    async handleSaveAmend(evt) {
+        await this.setState(currState => ({
             amending: false,
             toDo: evt.toDo,
         }));
         // need to update state of original array
-    };
+        await this.props.saveAmend(this.state);
+    }
 
     handleDelete = evt => {
         console.log(evt);
