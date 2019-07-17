@@ -26,7 +26,7 @@ class ToDoItem extends Component {
             toDo: evt.toDo,
         }));
         // need to update state of original array
-        await this.props.saveAmend(this.state);
+        this.props.saveAmend(this.state);
     }
 
     handleDelete = evt => {
