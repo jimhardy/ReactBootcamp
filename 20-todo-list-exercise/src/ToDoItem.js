@@ -1,6 +1,7 @@
 // item with amend, delete, and mark complete functions (mark complete prob just a class)
 import React, { Component } from 'react';
 import NewToDoForm from './NewToDoForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class ToDoItem extends Component {
     constructor(props) {
@@ -20,12 +21,17 @@ class ToDoItem extends Component {
         }));
     };
 
+    handleToggleComplete = evt => {
+        this.setState(currState => ({
+            complete: !this.state.complete,
+        }));
+    };
+
     async handleSaveAmend(evt) {
         await this.setState(currState => ({
             amending: false,
             toDo: evt.toDo,
         }));
-        // need to update state of original array
         this.props.saveAmend(this.state);
     }
 
@@ -36,17 +42,26 @@ class ToDoItem extends Component {
 
     render() {
         return (
-            <div>
+            <div className="ToDoItem">
                 {this.state.amending ? (
                     <NewToDoForm
                         saveToDo={this.handleSaveAmend}
                         toDo={this.state.toDo}
                     />
                 ) : (
-                    <p>
+                    <p
+                        className={this.state.complete ? 'completed' : null}
+                        onClick={this.handleToggleComplete}
+                    >
                         {this.state.toDo}
-                        <span onClick={this.handleAmend}> (AMEND)</span>
-                        <span onClick={this.handleDelete}> (DELETE)</span>
+                        <span onClick={this.handleAmend}>
+                            {'  '}
+                            <FontAwesomeIcon icon="edit" />
+                        </span>
+                        <span onClick={this.handleDelete}>
+                            {'  '}
+                            <FontAwesomeIcon icon="trash" />
+                        </span>
                     </p>
                 )}
             </div>

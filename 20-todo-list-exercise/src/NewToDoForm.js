@@ -1,5 +1,6 @@
 // form to add new todo
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class NewToDoForm extends Component {
     state = {
@@ -22,7 +23,8 @@ class NewToDoForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="NewToDoForm">
+                <h3>New To Do</h3>
                 <input
                     type="text"
                     name="toDo"
@@ -30,7 +32,12 @@ class NewToDoForm extends Component {
                     onChange={this.handleChange}
                     placeholder="To Do...."
                 />
-                {this.state.toDo !== '' ? <button>Save</button> : null}
+
+                {this.state.toDo !== '' ? (
+                    <button>
+                        <FontAwesomeIcon icon="save" />
+                    </button>
+                ) : null}
             </form>
         );
     }

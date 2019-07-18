@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import ToDoItem from './ToDoItem';
 import NewToDoForm from './NewToDoForm';
 import uuid from 'uuid/v4';
+import './ToDoList.css';
 
 class ToDoList extends Component {
     state = {
@@ -49,7 +50,7 @@ class ToDoList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="ToDoList">
                 <h1>To Do List</h1>
                 {this.state.toDos.map(item => (
                     <ToDoItem
