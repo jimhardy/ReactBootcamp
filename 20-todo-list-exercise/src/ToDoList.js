@@ -27,20 +27,8 @@ class ToDoList extends Component {
     };
 
     saveAmend = evt => {
-        // let newArr = [...this.state.toDos];
-        // const target = newArr.filter(todo => {
-        //     return todo.id === evt.id;
-        // });
-        // const index = newArr.indexOf(target[0]);
-        // newArr[index] = evt;
-        // this.setState(currState => ({
-        //     toDos: newArr,
-        // }));
-
-        // Solution with map instead of filter and indexOf
         const updatedArr = this.state.toDos.map(todo => {
             if (todo.id === evt.id) {
-                console.log(evt);
                 return { ...evt };
             }
             return todo;
