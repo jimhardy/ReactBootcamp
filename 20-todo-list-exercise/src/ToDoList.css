@@ -3,17 +3,78 @@ body {
     color: rgb(20, 20, 30);
 }
 
-.completed {
-    text-decoration: line-through;
+h1 {
+    margin-bottom: 1em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 300px;
+    margin: 10% auto 0 auto;
+}
+
+input {
+    width: 90%;
+    height: 30px;
+    background-color: rgb(255, 137, 137);
+    border: none;
+    color: black;
+    padding: 5px;
+    font-size: inherit;
+    margin-left: 3px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+.NewToDoForm {
+    margin: 0 auto;
+}
+
+button {
+    background-color: rgb(255, 100, 100);
+    color: rgb(20, 20, 30);
+    border: none;
+    cursor: pointer;
+    width: 1em;
+    font-size: 15px;
 }
 
 .ToDoItem {
+    margin-bottom: 1em;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.ToDoItems {
+    height: 50px;
+}
+
+.ToDoItemContainer {
+    display: grid;
+    grid-template-columns: 250px 25px 25px;
+    width: 300px;
+    padding-bottom: 10px;
+}
+
+.ToDoListContainer {
+    background-color: rgb(255, 100, 100);
+    width: 350px;
+    margin: 0 auto;
+}
+
+.ToDoItemButton {
+    font-size: 15px;
+    width: 1em;
 }
 
 .ToDoList {
-    background-color: rgb(255, 90, 90);
-    width: 50%;
     display: inline-block;
-    margin-top: 10%;
-    padding-bottom: 10%;
+    text-align: left;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: lightgray;
 }

@@ -36,33 +36,42 @@ class ToDoItem extends Component {
     }
 
     handleDelete = evt => {
-        console.log(evt);
         this.props.removeToDo(this.props.id);
     };
 
     render() {
         return (
-            <div className="ToDoItem">
+            <div className="ToDoItems">
                 {this.state.amending ? (
                     <NewToDoForm
                         saveToDo={this.handleSaveAmend}
                         toDo={this.state.toDo}
                     />
                 ) : (
-                    <p
-                        className={this.state.complete ? 'completed' : null}
-                        onClick={this.handleToggleComplete}
-                    >
-                        {this.state.toDo}
-                        <span onClick={this.handleAmend}>
-                            {'  '}
+                    <div className="ToDoItemContainer">
+                        <div
+                            className={
+                                this.state.complete
+                                    ? 'completed ToDoItem'
+                                    : 'ToDoItem'
+                            }
+                            onClick={this.handleToggleComplete}
+                        >
+                            {this.state.toDo}
+                        </div>
+                        <div
+                            onClick={this.handleAmend}
+                            className="ToDoItemButton ToDoItem"
+                        >
                             <FontAwesomeIcon icon="edit" />
-                        </span>
-                        <span onClick={this.handleDelete}>
-                            {'  '}
+                        </div>
+                        <div
+                            onClick={this.handleDelete}
+                            className="ToDoItemButton ToDoItem"
+                        >
                             <FontAwesomeIcon icon="trash" />
-                        </span>
-                    </p>
+                        </div>
+                    </div>
                 )}
             </div>
         );

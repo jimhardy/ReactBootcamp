@@ -27,21 +27,31 @@ class ToDoList extends Component {
     };
 
     saveAmend = evt => {
-        let newArr = [...this.state.toDos];
-        const target = newArr.filter(todo => {
-            return todo.id === evt.id;
+        // let newArr = [...this.state.toDos];
+        // const target = newArr.filter(todo => {
+        //     return todo.id === evt.id;
+        // });
+        // const index = newArr.indexOf(target[0]);
+        // newArr[index] = evt;
+        // this.setState(currState => ({
+        //     toDos: newArr,
+        // }));
+
+        // Solution with map instead of filter and indexOf
+        const updatedArr = this.state.toDos.map(todo => {
+            if (todo.id === evt.id) {
+                console.log(evt);
+                return { ...evt };
+            }
+            return todo;
         });
-        const index = newArr.indexOf(target[0]);
-        newArr[index] = evt;
-        this.setState(currState => ({
-            toDos: newArr,
-        }));
+        this.setState({ toDos: updatedArr });
     };
 
-    removeToDo = evt => {
+    removeToDo = id => {
         // used in item - remove todo
         const newArr = this.state.toDos.filter(todo => {
-            return todo.id !== evt;
+            return todo.id !== id;
         });
         this.setState(currState => ({
             toDos: newArr,
@@ -50,20 +60,22 @@ class ToDoList extends Component {
 
     render() {
         return (
-            <div className="ToDoList">
+            <div className="ToDoListContainer">
                 <h1>To Do List</h1>
-                {this.state.toDos.map(item => (
-                    <ToDoItem
-                        value={item.toDo}
-                        amendToDo={this.amendToDo}
-                        removeToDo={this.removeToDo}
-                        key={item.id}
-                        id={item.id}
-                        saveToDo={this.saveToDo}
-                        saveAmend={this.saveAmend}
-                        search={item}
-                    />
-                ))}
+                <div className="ToDoList">
+                    {this.state.toDos.map(item => (
+                        <ToDoItem
+                            value={item.toDo}
+                            amendToDo={this.amendToDo}
+                            removeToDo={this.removeToDo}
+                            key={item.id}
+                            id={item.id}
+                            saveToDo={this.saveToDo}
+                            saveAmend={this.saveAmend}
+                            search={item}
+                        />
+                    ))}
+                </div>
                 <NewToDoForm saveToDo={this.saveToDo} toDo="" />
             </div>
         );

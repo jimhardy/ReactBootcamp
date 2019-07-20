@@ -23,21 +23,28 @@ class NewToDoForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="NewToDoForm">
-                <h3>New To Do</h3>
+            <form
+                onSubmit={this.handleSubmit}
+                className="NewToDoForm ToDoItemContainer"
+            >
                 <input
                     type="text"
                     name="toDo"
                     value={this.state.toDo}
                     onChange={this.handleChange}
                     placeholder="To Do...."
+                    className="FormItem"
                 />
 
                 {this.state.toDo !== '' ? (
-                    <button>
+                    <button className="FormItem">
                         <FontAwesomeIcon icon="save" />
                     </button>
-                ) : null}
+                ) : (
+                    <button className="FormItem" disabled>
+                        <FontAwesomeIcon icon="save" />
+                    </button>
+                )}
             </form>
         );
     }
