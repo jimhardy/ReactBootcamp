@@ -8,6 +8,10 @@ class Die extends Component {
     }
     getIcon = () => `fas fa-dice-${this.numbers[this.props.val]}`;
 
+    handleClick = evt => {
+        this.props.handleClick(this.props.idx);
+    };
+
     render() {
         return (
             <div>
@@ -16,7 +20,7 @@ class Die extends Component {
                     style={{
                         backgroundColor: this.props.locked ? 'grey' : 'black',
                     }}
-                    onClick={this.props.handleClick}
+                    onClick={this.handleClick}
                 >
                     <i className={this.getIcon()} />
                 </button>
