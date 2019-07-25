@@ -58,7 +58,6 @@ class SumDistro extends Rule {
 /** Check if full house (3-of-kind and 2-of-kind) */
 
 class FullHouse extends Rule {
-    // TODO
     evalRoll = dice => {
         // should only be 2 numbers
         // freq of one numbers should be 3
