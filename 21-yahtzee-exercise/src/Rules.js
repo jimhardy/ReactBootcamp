@@ -59,19 +59,14 @@ class SumDistro extends Rule {
 
 class FullHouse extends Rule {
     evalRoll = dice => {
-        // should only be 2 numbers
-        // freq of one numbers should be 3
-        const d = new Set(dice);
-        return d.size === 2 && this.freq(dice).some(c => c === this.count)
-            ? this.score
-            : 0;
+        const freqs = this.freq(dice);
+        return freqs.includes(2) && freqs.includes(3) ? this.score : 0;
     };
 }
 
 /** Check for small straights. */
 
 class SmallStraight extends Rule {
-    // TODO
     evalRoll = dice => {
         const d = [...new Set(dice)].sort();
         // small straight must be 4 different dice
@@ -112,7 +107,7 @@ const threeOfKind = new SumDistro({ count: 3 });
 const fourOfKind = new SumDistro({ count: 4 });
 
 // full house scores as flat 25
-const fullHouse = new FullHouse({ count: 3, score: 25 });
+const fullHouse = new FullHouse({ score: 25 });
 
 // small/large straights score as 30/40
 const smallStraight = new SmallStraight({ score: 30 });
