@@ -28,6 +28,7 @@ class Game extends Component {
                 yahtzee: undefined,
                 chance: undefined,
             },
+            rolling: false,
         };
         this.roll = this.roll.bind(this);
         this.doScore = this.doScore.bind(this);
@@ -46,28 +47,37 @@ class Game extends Component {
             ),
             locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
             rollsLeft: st.rollsLeft - 1,
+            rolling: true,
         }));
+        setTimeout(() => {
+            this.setState({ rolling: false });
+        }, 500);
     }
 
     toggleLocked(idx) {
         // toggle whether idx is in locked or not
-        this.setState(st => ({
-            locked: [
-                ...st.locked.slice(0, idx),
-                !st.locked[idx],
-                ...st.locked.slice(idx + 1),
-            ],
-        }));
+        if (this.state.rollsLeft > 0) {
+            this.setState(st => ({
+                locked: [
+                    ...st.locked.slice(0, idx),
+                    !st.locked[idx],
+                    ...st.locked.slice(idx + 1),
+                ],
+            }));
+        }
     }
 
     doScore(rulename, ruleFn) {
         // evaluate this ruleFn with the dice and score this rulename
-        this.setState(st => ({
-            scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
-            rollsLeft: NUM_ROLLS,
-            locked: Array(NUM_DICE).fill(false),
-        }));
-        this.roll();
+        console.log(this.state.scores[rulename]);
+        if (this.state.scores[rulename] === undefined) {
+            this.setState(st => ({
+                scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
+                rollsLeft: NUM_ROLLS,
+                locked: Array(NUM_DICE).fill(false),
+            }));
+            this.roll();
+        }
     }
 
     render() {
@@ -81,6 +91,7 @@ class Game extends Component {
                             dice={this.state.dice}
                             locked={this.state.locked}
                             handleClick={this.toggleLocked}
+                            rolling={this.state.rolling}
                         />
                         <div className="Game-button-wrapper">
                             <button

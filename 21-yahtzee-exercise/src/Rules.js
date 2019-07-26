@@ -70,12 +70,13 @@ class FullHouse extends Rule {
 
 /** Check for small straights. */
 
-class SmallStraight {
+class SmallStraight extends Rule {
     // TODO
     evalRoll = dice => {
-        const d = new Set(dice);
-        // small straight must be 4 different dice & only one can be a 1 or a 6
-        return d.size === 4 && (!d.has(1) || !d.has(6)) ? this.score : 0;
+        const d = [...new Set(dice)].sort();
+        // small straight must be 4 different dice
+        const max = d[0] + 3;
+        return d.length === 4 && d[3] === max ? this.score : 0;
     };
 }
 
@@ -84,7 +85,6 @@ class SmallStraight {
 class LargeStraight extends Rule {
     evalRoll = dice => {
         const d = new Set(dice);
-
         // large straight must be 5 different dice & only one can be a 1 or a 6
         return d.size === 5 && (!d.has(1) || !d.has(6)) ? this.score : 0;
     };

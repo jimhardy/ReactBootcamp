@@ -16,9 +16,13 @@ class Die extends Component {
         return (
             <div>
                 <button
-                    className={'Die'}
+                    className={
+                        !this.props.locked && this.props.rolling
+                            ? 'Die rolling'
+                            : 'Die'
+                    }
                     style={{
-                        backgroundColor: this.props.locked ? 'grey' : 'black',
+                        color: this.props.locked ? 'rgb(150, 150, 150)' : '',
                     }}
                     onClick={this.handleClick}
                 >
