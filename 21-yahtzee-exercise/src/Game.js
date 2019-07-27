@@ -29,6 +29,7 @@ class Game extends Component {
                 chance: undefined,
             },
             rolling: false,
+            totalScore: 0,
         };
         this.roll = this.roll.bind(this);
         this.doScore = this.doScore.bind(this);
@@ -41,16 +42,17 @@ class Game extends Component {
 
     roll(evt) {
         // roll dice whose indexes are in reroll
-        this.setState(st => ({
-            dice: st.dice.map((d, i) =>
-                st.locked[i] ? d : Math.ceil(Math.random() * 6)
-            ),
-            locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-            rollsLeft: st.rollsLeft - 1,
-            rolling: true,
-        }));
+        this.setState({ rolling: true });
         setTimeout(() => {
-            this.setState({ rolling: false });
+            this.setState(st => ({
+                dice: st.dice.map((d, i) =>
+                    st.locked[i] ? d : Math.ceil(Math.random() * 6)
+                ),
+                locked:
+                    st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
+                rollsLeft: st.rollsLeft - 1,
+                rolling: false,
+            }));
         }, 500);
     }
 
@@ -75,6 +77,7 @@ class Game extends Component {
                 scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
                 rollsLeft: NUM_ROLLS,
                 locked: Array(NUM_DICE).fill(false),
+                totalScore: st.totalScore + ruleFn(this.state.dice),
             }));
             this.roll();
         }
@@ -85,7 +88,9 @@ class Game extends Component {
             <div className="Game">
                 <header className="Game-header">
                     <h1 className="App-title">Yahtzee!</h1>
-
+                    <h3 className="App-score">
+                        Total Score: {this.state.totalScore}
+                    </h3>
                     <section className="Game-dice-section">
                         <Dice
                             dice={this.state.dice}
@@ -96,7 +101,10 @@ class Game extends Component {
                         <div className="Game-button-wrapper">
                             <button
                                 className="Game-reroll"
-                                disabled={this.state.locked.every(x => x)}
+                                disabled={
+                                    this.state.locked.every(x => x) ||
+                                    this.state.rollsLeft === 0
+                                }
                                 onClick={this.roll}
                             >
                                 {this.state.rollsLeft} Rerolls Left
