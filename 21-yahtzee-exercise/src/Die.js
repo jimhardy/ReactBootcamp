@@ -6,29 +6,23 @@ class Die extends Component {
         super(props);
         this.numbers = ['', 'one', 'two', 'three', 'four', 'five', 'six'];
     }
-    getIcon = () => `fas fa-dice-${this.numbers[this.props.val]}`;
+    getIcon = () => `Die fas fa-dice-${this.numbers[this.props.val]}`;
 
     handleClick = evt => {
         this.props.handleClick(this.props.idx);
     };
 
     render() {
+        let classes = this.getIcon();
+        const { locked, rolling, disabled } = this.props;
+        if (locked) classes += ' Die-locked';
+        if (!locked && rolling) classes += ' rolling';
         return (
-            <div>
-                <button
-                    className={
-                        !this.props.locked && this.props.rolling
-                            ? 'Die rolling'
-                            : 'Die'
-                    }
-                    style={{
-                        color: this.props.locked ? 'rgb(150, 150, 150)' : '',
-                    }}
-                    onClick={this.handleClick}
-                >
-                    <i className={this.getIcon()} />
-                </button>
-            </div>
+            <i
+                className={classes}
+                onClick={this.handleClick}
+                disabled={disabled}
+            />
         );
     }
 }

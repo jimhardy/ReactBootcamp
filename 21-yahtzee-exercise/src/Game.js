@@ -10,7 +10,9 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dice: Array.from({ length: NUM_DICE }),
+            dice: Array.from({ length: NUM_DICE }).map(d =>
+                Math.ceil(Math.random() * 6)
+            ),
             locked: Array(NUM_DICE).fill(false),
             rollsLeft: NUM_ROLLS,
             scores: {
@@ -42,7 +44,6 @@ class Game extends Component {
     }
 
     roll(evt) {
-        console.log('roll');
         // roll dice whose indexes are in reroll
         this.setState({ rolling: true });
         setTimeout(() => {
@@ -60,7 +61,7 @@ class Game extends Component {
 
     toggleLocked(idx) {
         // toggle whether idx is in locked or not
-        if (this.state.rollsLeft > 0) {
+        if (this.state.rollsLeft > 0 && !this.state.rolling) {
             this.setState(st => ({
                 locked: [
                     ...st.locked.slice(0, idx),
@@ -86,7 +87,6 @@ class Game extends Component {
     }
 
     reset = () => {
-        console.log('reset');
         this.setState(st => ({
             rollsLeft: NUM_ROLLS,
             locked: Array(NUM_DICE).fill(false),
@@ -111,43 +111,60 @@ class Game extends Component {
         this.roll();
     };
 
+    displayRollInfo = () => {
+        const messages = [
+            '0 Rolls Left',
+            '1 Roll Left',
+            '2 Rolls Left',
+            'Starting Round',
+        ];
+        return messages[this.state.rollsLeft];
+    };
+
     render() {
+        const {
+            dice,
+            locked,
+            rollsLeft,
+            rolling,
+            scores,
+            scoreArr,
+            totalScore,
+        } = this.state;
         return (
             <div className="Game">
                 <header className="Game-header">
                     <h1 className="App-title">Yahtzee!</h1>
-                    <h3 className="App-score">
-                        Total Score: {this.state.totalScore}
-                    </h3>
+                    <h3 className="App-score">Total Score: {totalScore}</h3>
                     <section className="Game-dice-section">
                         <Dice
-                            dice={this.state.dice}
-                            locked={this.state.locked}
+                            dice={dice}
+                            locked={locked}
                             handleClick={this.toggleLocked}
-                            rolling={this.state.rolling}
+                            rolling={rolling}
+                            disabled={rollsLeft === 0}
                         />
                         <div>
                             <div className="Game-button-wrapper">
                                 <button
                                     className="Game-reroll"
                                     disabled={
-                                        this.state.locked.every(x => x) ||
-                                        this.state.rollsLeft === 0
+                                        locked.every(x => x) ||
+                                        rollsLeft === 0 ||
+                                        rolling
                                     }
                                     onClick={
-                                        this.state.scoreArr.length >= 13
+                                        scoreArr.length >= 13
                                             ? this.reset
                                             : this.roll
                                     }
                                 >
-                                    {this.state.scoreArr.length >= 13
+                                    {scoreArr.length >= 13
                                         ? 'Play Again?'
-                                        : `${
-                                              this.state.rollsLeft
-                                          } Rerolls Left`}
+                                        : `${this.displayRollInfo()}`}
                                 </button>
                             </div>
-                            {this.state.scoreArr.length < 13 ? (
+                            {scoreArr.length < 13 ? (
                                 <button
                                     onClick={this.reset}
                                     className="Game-reroll"
@@ -159,7 +176,7 @@ class Game extends Component {
                         </div>
                     </section>
                 </header>
-                <ScoreTable doScore={this.doScore} scores={this.state.scores} />
+                <ScoreTable doScore={this.doScore} scores={scores} />
             </div>
         );
     }

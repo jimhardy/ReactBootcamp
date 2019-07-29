@@ -9,11 +9,12 @@
 .App-title {
     margin-top: 1rem;
     color: white;
+    margin: 1rem auto;
     margin-bottom: 0;
     font-weight: 100;
     display: inline-block;
     font-size: 5rem;
-    width: 50%;
+    width: 100%;
 }
 
 .App-score {
