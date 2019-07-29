@@ -8,12 +8,12 @@
     justify-content: center;
     align-items: center;
 }
-h2 {
+/* h2 {
     font-weight: 100;
     font-size: 2em;
     border-bottom: 2px solid purple;
     display: inline-block;
-}
+} */
 .Game-dice-section {
     width: 80%;
     margin-left: auto;
@@ -27,6 +27,9 @@ h2 {
     align-items: center;
 }
 
+#reset {
+    font-size: 1em;
+}
 .Game-reroll {
     font-size: 2em;
     color: white;

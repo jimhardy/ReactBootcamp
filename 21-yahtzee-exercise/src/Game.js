@@ -30,6 +30,7 @@ class Game extends Component {
             },
             rolling: false,
             totalScore: 0,
+            scoreArr: [],
         };
         this.roll = this.roll.bind(this);
         this.doScore = this.doScore.bind(this);
@@ -41,6 +42,7 @@ class Game extends Component {
     }
 
     roll(evt) {
+        console.log('roll');
         // roll dice whose indexes are in reroll
         this.setState({ rolling: true });
         setTimeout(() => {
@@ -71,17 +73,43 @@ class Game extends Component {
 
     doScore(rulename, ruleFn) {
         // evaluate this ruleFn with the dice and score this rulename
-        console.log(this.state.scores[rulename]);
-        if (this.state.scores[rulename] === undefined) {
-            this.setState(st => ({
-                scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
-                rollsLeft: NUM_ROLLS,
-                locked: Array(NUM_DICE).fill(false),
-                totalScore: st.totalScore + ruleFn(this.state.dice),
-            }));
-            this.roll();
-        }
+        // if (this.state.scores[rulename] === undefined) {
+        this.setState(st => ({
+            scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
+            rollsLeft: NUM_ROLLS,
+            locked: Array(NUM_DICE).fill(false),
+            totalScore: st.totalScore + ruleFn(this.state.dice),
+            scoreArr: [...st.scoreArr, rulename],
+        }));
+        this.roll();
+        // }
     }
+
+    reset = () => {
+        console.log('reset');
+        this.setState(st => ({
+            rollsLeft: NUM_ROLLS,
+            locked: Array(NUM_DICE).fill(false),
+            scores: {
+                ones: undefined,
+                twos: undefined,
+                threes: undefined,
+                fours: undefined,
+                fives: undefined,
+                sixes: undefined,
+                threeOfKind: undefined,
+                fourOfKind: undefined,
+                fullHouse: undefined,
+                smallStraight: undefined,
+                largeStraight: undefined,
+                yahtzee: undefined,
+                chance: undefined,
+            },
+            totalScore: 0,
+            scoreArr: [],
+        }));
+        this.roll();
+    };
 
     render() {
         return (
@@ -98,17 +126,36 @@ class Game extends Component {
                             handleClick={this.toggleLocked}
                             rolling={this.state.rolling}
                         />
-                        <div className="Game-button-wrapper">
-                            <button
-                                className="Game-reroll"
-                                disabled={
-                                    this.state.locked.every(x => x) ||
-                                    this.state.rollsLeft === 0
-                                }
-                                onClick={this.roll}
-                            >
-                                {this.state.rollsLeft} Rerolls Left
-                            </button>
+                        <div>
+                            <div className="Game-button-wrapper">
+                                <button
+                                    className="Game-reroll"
+                                    disabled={
+                                        this.state.locked.every(x => x) ||
+                                        this.state.rollsLeft === 0
+                                    }
+                                    onClick={
+                                        this.state.scoreArr.length >= 13
+                                            ? this.reset
+                                            : this.roll
+                                    }
+                                >
+                                    {this.state.scoreArr.length >= 13
+                                        ? 'Play Again?'
+                                        : `${
+                                              this.state.rollsLeft
+                                          } Rerolls Left`}
+                                </button>
+                            </div>
+                            {this.state.scoreArr.length < 13 ? (
+                                <button
+                                    onClick={this.reset}
+                                    className="Game-reroll"
+                                    id="reset"
+                                >
+                                    Reset Game
+                                </button>
+                            ) : null}
                         </div>
                     </section>
                 </header>
