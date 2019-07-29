@@ -14,7 +14,7 @@ class RuleRow extends Component {
             >
                 <td className="RuleRow-name">{name}</td>
                 <td className="RuleRow-score">
-                    {score !== undefined ? score : description}
+                    {!disabled ? score : description}
                 </td>
             </tr>
         );
