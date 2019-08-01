@@ -39,6 +39,16 @@ class ToDoItem extends Component {
         this.props.removeToDo(this.props.id);
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        // console.log('todo component updated!');
+        // console.log(prevState.toDo);
+        // console.log(this.state.toDo);
+    }
+
+    componentWillUnmount() {
+        console.log('component unmount');
+    }
+
     render() {
         return (
             <div className="ToDoItems">

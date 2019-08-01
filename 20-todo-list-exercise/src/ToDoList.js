@@ -46,6 +46,12 @@ class ToDoList extends Component {
         }));
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        // console.log('list component updated!');
+        // console.log(prevState.toDos);
+        // console.log(this.state.toDos);
+    }
+
     render() {
         return (
             <div className="ToDoListContainer">
