@@ -12,6 +12,10 @@ class ZenQuote extends Component {
             });
         }, 1000);
     }
+
+    componentDidUpdate() {
+        console.log('component updated!');
+    }
     render() {
         return (
             <div>
