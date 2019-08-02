@@ -23,9 +23,15 @@ class Deck extends Component {
                 this.state.deckId
             }/draw/?count=1`
         );
-        console.log(card.data.cards[0]);
+
+        const cardObj = {
+            ...card.data.cards[0],
+            rotate: Math.floor(Math.random() * 50),
+            right: Math.floor(Math.random() * 10),
+            top: Math.floor(Math.random() * 10),
+        };
         this.setState(st => ({
-            drawnCards: [...st.drawnCards, card.data.cards[0]],
+            drawnCards: [...st.drawnCards, cardObj],
         }));
     };
 
@@ -41,6 +47,9 @@ class Deck extends Component {
                     <Card
                         imgUrl={card.image}
                         alt={`The ${card.value} of ${card.suit}`}
+                        rotate={card.rotate}
+                        right={card.right}
+                        top={card.top}
                     />
                 ))}
                 <button onClick={this.handleClick}>Draw Card!</button>
