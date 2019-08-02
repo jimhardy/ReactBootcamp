@@ -16,15 +16,16 @@ class Deck extends Component {
         console.log(deck.data);
     }
 
-    drawCard = () => {
+    drawCard = async () => {
         console.log('draw card!');
-        const card = axios.get(
+        const card = await axios.get(
             `https://deckofcardsapi.com/api/deck/${
                 this.state.deckId
-            }/draw/?count=`
+            }/draw/?count=1`
         );
+        console.log(card.data.cards[0]);
         this.setState(st => ({
-            drawnCards: [...st, card],
+            drawnCards: [...st.drawnCards, card.data.cards[0]],
         }));
     };
 
@@ -37,7 +38,10 @@ class Deck extends Component {
             <div>
                 <h1>Card Dealer</h1>
                 {this.state.drawnCards.map(card => (
-                    <Card />
+                    <Card
+                        imgUrl={card.image}
+                        alt={`The ${card.value} of ${card.suit}`}
+                    />
                 ))}
                 <button onClick={this.handleClick}>Draw Card!</button>
             </div>
