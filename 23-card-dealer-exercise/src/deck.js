@@ -1,0 +1,48 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+import './deck.css';
+import Card from './card';
+
+class Deck extends Component {
+    state = {
+        deckId: '',
+        drawnCards: [],
+    };
+    async componentDidMount() {
+        const deck = await axios.get(
+            'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
+        );
+        this.setState({ deckId: deck.data.deck_id });
+        console.log(deck.data);
+    }
+
+    drawCard = () => {
+        console.log('draw card!');
+        const card = axios.get(
+            `https://deckofcardsapi.com/api/deck/${
+                this.state.deckId
+            }/draw/?count=`
+        );
+        this.setState(st => ({
+            drawnCards: [...st, card],
+        }));
+    };
+
+    handleClick = () => {
+        this.drawCard();
+    };
+
+    render() {
+        return (
+            <div>
+                <h1>Card Dealer</h1>
+                {this.state.drawnCards.map(card => (
+                    <Card />
+                ))}
+                <button onClick={this.handleClick}>Draw Card!</button>
+            </div>
+        );
+    }
+}
+
+export default Deck;

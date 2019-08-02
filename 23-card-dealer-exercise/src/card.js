@@ -1,0 +1,13 @@
+import React, { Component } from 'react';
+
+class Card extends Component {
+    render() {
+        return (
+            <div>
+                <img imgSrc={this.props.imgUrl} alt={this.props.card} />
+            </div>
+        );
+    }
+}
+
+export default Card;
