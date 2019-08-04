@@ -9,12 +9,8 @@ class Card extends Component {
             top: `${this.props.top}px`,
         };
         return (
-            <div className="card">
-                <img
-                    style={style}
-                    src={this.props.imgUrl}
-                    alt={this.props.card}
-                />
+            <div className="card" style={style} key={this.key}>
+                <img src={this.props.imgUrl} alt={this.props.card} />
             </div>
         );
     }
