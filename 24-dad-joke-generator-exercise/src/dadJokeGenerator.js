@@ -15,6 +15,7 @@ class DadJokeGenerator extends Component {
         const jokeArr = await this.state.jokes.map(async joke => {
             joke = await this.jokeGetter();
         });
+
         await this.setState(st => ({
             jokes: jokeArr,
         }));
