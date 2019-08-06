@@ -3,56 +3,70 @@ import axios from 'axios';
 import Joke from './joke';
 
 class DadJokeGenerator extends Component {
-    static defaultProps = {
-        numJokesToGet: 10,
+  static defaultProps = {
+    numJokesToGet: 10
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      jokes: [],
+      loaded: false
     };
-    constructor(props) {
-        super(props);
-        this.state = {
-            jokes: [],
-            loaded: false,
-        };
-        this.jokeGetter = this.jokeGetter.bind(this);
+    this.jokeGetter = this.jokeGetter.bind(this);
+  }
+
+  async componentDidMount() {
+    let jokes = [];
+    let jokeSet = new Set(jokes) || 0;
+    while (jokeSet.size < this.props.numJokesToGet) {
+      let res = await this.jokeGetter();
+      const newJoke = { joke: { ...res.data, votes: 0 } };
+      // console.log(newJoke);
+      await jokes.push(newJoke);
+      jokeSet = new Set(jokes);
     }
 
-    async componentDidMount() {
-        let jokes = [];
-        while (jokes.length < this.props.numJokesToGet) {
-            let res = await axios.get('https://icanhazdadjoke.com/', {
-                headers: { Accept: 'application/json' },
-            });
-            console.log(res);
-            jokes.push(res.data);
-        }
+    this.setState({ jokes: [...jokeSet], loaded: true });
+    console.log(this.state.jokes);
+  }
 
-        this.setState({ jokes: jokes, loaded: true });
-        const check = new Set(jokes);
-        console.log(check);
-    }
+  async jokeGetter() {
+    return axios.get('https://icanhazdadjoke.com/', {
+      headers: { Accept: 'application/json' }
+    });
+  }
 
-    async jokeGetter() {
-        return axios.get('https://icanhazdadjoke.com/', {
-            headers: { Accept: 'application/json' },
-        });
-    }
+  handleVote = evt => {
+    const updatedArr = this.state.jokes.map(jk => {
+      if (jk.joke.id === evt.joke.id) {
+        return { ...evt };
+      }
+      return jk;
+    });
+    this.setState({ jokes: updatedArr });
+  };
 
-    render() {
-        return (
-            <div className="JokeList">
-                <h1>Max Joke Generator</h1>
-                {this.state.loaded ? (
-                    <div className="JoneList-Jokes">
-                        {this.state.jokes.map(jk => (
-                            // <div key={jk.id}>{jk.joke}</div>
-                            <Joke joke={jk.joke} key={jk.id} />
-                        ))}
-                    </div>
-                ) : (
-                    <p>loading...</p>
-                )}
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="JokeList">
+        <h1>Generator</h1>
+        {this.state.loaded ? (
+          <div className="JoneList-Jokes">
+            {this.state.jokes.map(jk => (
+              // <div key={jk.id}>{jk.joke}</div>
+              <Joke
+                data={jk.joke}
+                key={jk.joke.id}
+                handleVote={this.handleVote}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>loading...</p>
+        )}
+      </div>
+    );
+  }
 }
 
 export default DadJokeGenerator;
