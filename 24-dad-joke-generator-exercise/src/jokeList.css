@@ -1,0 +1,18 @@
+.JokeList {
+  border: 1px solid red;
+  display: flex;
+  background-color: azure;
+  width: 80%;
+}
+
+.JokeList-sidebar {
+  width: 500px;
+}
+
+.JokeList-sidebar-emoji {
+  width: 100px;
+}
+
+.Joke {
+  border: 1px solid blue;
+}
