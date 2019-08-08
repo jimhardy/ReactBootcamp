@@ -25,9 +25,10 @@ class DadJoke extends Component {
     render() {
         return (
             <li>
-                <button onClick={this.handleUpvote}>upvote </button>{' '}
-                <button onClick={this.handleDownvote}>downvote </button>
-                {`${this.state.joke.joke} votes: ${this.state.joke.votes}`}
+                {`${this.state.joke.joke}  `}
+                <button onClick={this.handleUpvote}>+</button>
+                <span> {this.state.joke.votes} </span>
+                <button onClick={this.handleDownvote}>-</button>
             </li>
         );
     }
