@@ -3,6 +3,7 @@ import axios from 'axios';
 import Joke from './joke';
 import './jokeList.css';
 import './App.css';
+import FlipMove from 'react-flip-move';
 
 class DadJokeGenerator extends Component {
   static defaultProps = {
@@ -81,6 +82,7 @@ class DadJokeGenerator extends Component {
               </button>
             </div>
             <div className="JokeList-jokes">
+              <FlipMove>
               {this.state.jokes.map(jk => (
                 <Joke
                   data={jk.joke}
@@ -90,6 +92,7 @@ class DadJokeGenerator extends Component {
                   downvote={() => this.handleVote(jk.joke, -1)}
                 />
               ))}
+              </FlipMove>
             </div>
           </div>
         ) : (
