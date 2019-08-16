@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Joke from './joke';
+import Spinner from './jokeSpinner';
 import './jokeList.css';
 import './App.css';
 import FlipMove from 'react-flip-move';
@@ -15,6 +16,7 @@ class DadJokeGenerator extends Component {
             jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]'),
             loaded: false,
         };
+        this.seenJokes = new Set(this.state.jokes.map(jk => jk.joke.joke));
         this.getJokes = this.getJokes.bind(this);
         this.handleVote = this.handleVote.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -30,18 +32,42 @@ class DadJokeGenerator extends Component {
 
     async getJokes() {
         this.setState({ loaded: false });
-        let jokes = [];
-        let jokeSet = new Set(jokes) || 0;
-        while (jokeSet.size < this.props.numJokesToGet) {
-            let res = await axios.get('https://icanhazdadjoke.com/', {
-                headers: { Accept: 'application/json' },
-            });
-            const newJoke = { joke: { ...res.data, votes: 0 } };
-            await jokes.push(newJoke);
-            jokeSet = new Set(jokes);
+        try {
+            let jokes = [];
+            let jokeSet = new Set(jokes) || 0;
+            while (jokeSet.size < this.props.numJokesToGet) {
+                let res = await axios.get('https://icanhazdadjoke.com/', {
+                    headers: { Accept: 'application/json' },
+                });
+
+                const newJoke = { joke: { ...res.data, votes: 0 } };
+                if (
+                    !this.seenJokes.has(newJoke.joke.joke) &&
+                    !jokeSet.has(newJoke)
+                ) {
+                    await jokes.push(newJoke);
+                    jokeSet = new Set(jokes);
+                    console.log(jokeSet);
+                } else {
+                    console.log('duplicate found');
+                    console.log(newJoke);
+                }
+            }
+            await this.setState(
+                st => ({
+                    jokes: [...st.jokes, ...jokeSet],
+                    loaded: true,
+                }),
+
+                await window.localStorage.setItem(
+                    'jokes',
+                    JSON.stringify(jokes)
+                )
+            );
+        } catch (err) {
+            console.log(err);
+            this.setState({ loaded: true });
         }
-        this.setState({ jokes: [...jokeSet], loaded: true });
-        window.localStorage.setItem('jokes', JSON.stringify(jokes));
     }
 
     async handleVote(data, delta) {
@@ -53,7 +79,10 @@ class DadJokeGenerator extends Component {
         });
         const sortedArr = this.jokeListSort(updatedArr);
         await this.setState({ jokes: sortedArr });
-        window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes));
+        await window.localStorage.setItem(
+            'jokes',
+            JSON.stringify(this.state.jokes)
+        );
     }
 
     jokeListSort = array => {
@@ -113,7 +142,7 @@ class DadJokeGenerator extends Component {
                         </div>
                     </div>
                 ) : (
-                    <p>loading...</p>
+                    <Spinner />
                 )}
             </div>
         );
