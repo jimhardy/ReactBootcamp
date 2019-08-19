@@ -14,7 +14,7 @@ class DadJokeGenerator extends Component {
         super(props);
         this.state = {
             jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]'),
-            loaded: false,
+            loading: true,
         };
         this.seenJokes = new Set(this.state.jokes.map(jk => jk.joke.joke));
         this.getJokes = this.getJokes.bind(this);
@@ -26,12 +26,12 @@ class DadJokeGenerator extends Component {
         if (this.state.jokes.length === 0) {
             this.getJokes();
         } else {
-            this.setState({ loaded: true });
+            this.setState({ loading: false });
         }
     }
 
     async getJokes() {
-        this.setState({ loaded: false });
+        this.setState({ loading: true });
         try {
             let jokes = [];
             let jokeSet = new Set(jokes) || 0;
@@ -56,7 +56,7 @@ class DadJokeGenerator extends Component {
             await this.setState(
                 st => ({
                     jokes: [...st.jokes, ...jokeSet],
-                    loaded: true,
+                    loading: false,
                 }),
 
                 await window.localStorage.setItem(
@@ -66,7 +66,7 @@ class DadJokeGenerator extends Component {
             );
         } catch (err) {
             console.log(err);
-            this.setState({ loaded: true });
+            this.setState({ loading: false });
         }
     }
 
@@ -106,7 +106,7 @@ class DadJokeGenerator extends Component {
     render() {
         return (
             <div>
-                {this.state.loaded ? (
+                {!this.state.loading ? (
                     <div className="JokeList">
                         <div className="JokeList-sidebar">
                             <h1 className="JokeList-title">
