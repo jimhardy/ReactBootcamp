@@ -47,7 +47,6 @@ class DadJokeGenerator extends Component {
                 ) {
                     await jokes.push(newJoke);
                     jokeSet = new Set(jokes);
-                    console.log(jokeSet);
                 } else {
                     console.log('duplicate found');
                     console.log(newJoke);
@@ -101,7 +100,7 @@ class DadJokeGenerator extends Component {
 
     handleClick() {
         this.getJokes();
-    }
+    } /*  */
 
     render() {
         return (
