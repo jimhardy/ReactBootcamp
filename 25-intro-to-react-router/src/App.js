@@ -13,7 +13,21 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Route path="/dog" component={Dog} />
+        <nav className='App-nav'>
+          <NavLink exact activeClassName='active-link' to='/'>About</NavLink>
+          <NavLink exact activeClassName='active-link' to='/dog'>Dog</NavLink>
+          <NavLink exact activeClassName='active-link' to='/dog/r'>(r)</NavLink>
+          <NavLink exact activeClassName='active-link' to='/dog/c'>(c)</NavLink>
+          <NavLink exact activeClassName='active-link' to='/contact'>Contact</NavLink>
+        </nav>
+        <Switch>
+          <Route exact path="/" component={About} />
+          {/* Component will instantiate a new component every time */}
+          <Route exact path="/dog/c" component={() => <Dog name='Muffins' />} />
+          {/* Render will try and re-use the same component */}
+          <Route exact path="/dog/r" render={() => <Dog name='Biscuits' />} />
+          <Route exact path="/contact" component={Contact} />
+        </Switch>
       </div>
     );
   }
