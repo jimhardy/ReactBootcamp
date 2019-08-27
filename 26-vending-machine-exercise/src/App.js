@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { Route, Switch, NavLink } from "react-router-dom";
+import VendingMachine from './VendingMachine';
+import Sardines from './Sardines'
+import Crisps from './Crisps';
+import Soda from './Soda';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <nav className="App-nav">
+          <NavLink exact activeClassName='active-link' to='/'>Home</NavLink>
+          <NavLink exact activeClassName='active-link' to='/Sardines'>Sardines</NavLink>
+          <NavLink exact activeClassName='active-link' to='/Crisps'>Crisps</NavLink>
+          <NavLink exact activeClassName='active-link' to='/Soda'>Soda</NavLink>
+        </nav>
+        <Switch>
+          <Route exact path="/" component={VendingMachine} />
+          <Route exact path="/Sardines" component={Sardines} />
+          <Route exact path="/Crisps" component={Crisps} />
+          <Route exact path="/Soda" component={Soda} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
