@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class Sardines extends Component {
     state = {}
     render() {
-        return (<div>
-            <h1>
-                I AM THE SARDINES PAGE
-            </h1>
-        </div>);
+        return (
+            <div className="Sardines">
+                <h1>I AM THE SARDINES PAGE</h1>
+            </div>
+        );
     }
 }
 

@@ -5,7 +5,7 @@ class VendingMachine extends Component {
     state = {}
     render() {
         return (
-            <div>
+            <div className="VendingMachine">
                 <h1>I AM THE VENDING MACHINE PAGE</h1>
             </div>
         );
