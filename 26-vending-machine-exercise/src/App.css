@@ -31,7 +31,12 @@ a {
 }
 
 .VendingMachine {
+    background-image: url('vMachine.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     background-color: red;
+    background-size: 50% auto;
     width: 100vw;
     height: 100vh;
 }
