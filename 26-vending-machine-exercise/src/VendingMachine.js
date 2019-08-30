@@ -9,12 +9,12 @@ class VendingMachine extends Component {
         return (
             <div className="VendingMachine">
                 <h1>I AM THE VENDING MACHINE PAGE</h1>
-                <ul>
+                <ul className="VendingMachine-list">
                     <li>
-                        <Link to="/sardines">SARDINES</Link>
+                        <Link to="/sardines">Sardines</Link>
                     </li>
                     <li>
-                        <Link to="/soda">SODA!</Link>
+                        <Link to="/soda">Soda</Link>
                     </li>
                     <li>
                         <Link to="/crisps">Crisps</Link>

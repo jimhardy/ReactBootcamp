@@ -1,0 +1,22 @@
+.Navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(69, 90, 100, 1);
+    height: 100%;
+}
+
+.Navbar a {
+    text-decoration: none;
+    color: rgba(144, 164, 174, 1);
+    transition: all 0.5s ease;
+}
+
+.Navbar .Navbar-active {
+    color: white;
+}
+
+.Navbar a:hover {
+    color: rgb(91, 98, 155);
+    cursor: pointer;
+}

@@ -41,6 +41,11 @@ a {
     height: 100vh;
 }
 
+.VendingMachine-list {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .Soda {
     background-color: blue;
     width: 100vw;
