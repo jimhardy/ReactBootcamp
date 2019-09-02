@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Message from './Message';
 
 
 
@@ -8,18 +9,16 @@ class VendingMachine extends Component {
     render() {
         return (
             <div className="VendingMachine">
-                <h1>I AM THE VENDING MACHINE PAGE</h1>
-                <ul className="VendingMachine-list">
-                    <li>
+                <Message>
+                    <h1>I AM THE VENDING MACHINE PAGE</h1>
+                </Message>
+                <Message>
+                    <div className="VendingMachine-list">
                         <Link to="/sardines">Sardines</Link>
-                    </li>
-                    <li>
                         <Link to="/soda">Soda</Link>
-                    </li>
-                    <li>
                         <Link to="/crisps">Crisps</Link>
-                    </li>
-                </ul>
+                    </div>
+                </Message>
             </div>
         );
     }

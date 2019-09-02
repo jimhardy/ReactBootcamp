@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Message from './Message';
+
 
 
 class Crisps extends Component {
@@ -7,8 +9,12 @@ class Crisps extends Component {
     render() {
         return (
             <div className="Crisps">
-                <h1>I AM THE CRISPS PAGE</h1>
-                <Link to="/">Go Back</Link>
+                <Message>
+                    <h1>I AM THE CRISPS PAGE</h1>
+                </Message>
+                <Message>
+                    <Link to="/">Go Back</Link>
+                </Message>
             </div>
         );
     }
