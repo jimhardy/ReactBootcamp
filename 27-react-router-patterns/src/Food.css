@@ -1,0 +1,8 @@
+.Food {
+    background-color: rgb(195, 211, 211);
+    text-align: center;
+}
+
+.Food img {
+    width: 500px;
+}
