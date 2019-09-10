@@ -1,14 +1,18 @@
-import React from 'react';
+import { React, Component } from 'react';
 import './App.css';
-import { Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import Dog from './Dog';
+import Nav from './Nav';
 
-function App() {
+
+class App extends Component {
+  state = {}
   defaultprops = {
     dogs: [
       {
         name: "Whiskey",
         age: 5,
-        src: whiskey,
+        src: '',
         facts: [
           "Whiskey loves eating popcorn.",
           "Whiskey is a terrible guard dog.",
@@ -18,7 +22,7 @@ function App() {
       {
         name: "Hazel",
         age: 3,
-        src: hazel,
+        src: '',
         facts: [
           "Hazel has soooo much energy!",
           "Hazel is highly intelligent.",
@@ -28,7 +32,7 @@ function App() {
       {
         name: "Tubby",
         age: 4,
-        src: tubby,
+        src: '',
         facts: [
           "Tubby is not the brightest dog",
           "Tubby does not like walks or exercise.",
@@ -37,16 +41,17 @@ function App() {
       }
     ]
   }
-  return (
-    <div className="App">
-      <Nav dogs={this.dogs} />
-      <Switch>
-        {this.dogs.map(dog => {
-          <Dog stats={dog} />
-        })}
-      </Switch>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <Nav dogs={this.dogs} />
+        <Switch>
+
+        </Switch>
+      </div>
+    );
+
+  }
 }
 
 export default App;
