@@ -9,7 +9,12 @@ class Routes extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' render={(routeProps) => <DogList {...routeProps} />} />
+                <Route exact path='/' render={(routeProps) => <DogList details={this.props.dogs} {...routeProps} />} />
+                <Route exact path='/dog/:name' render={(routeProps) =>
+                    <DogDetails details={
+                        this.props.dogs.filter(dog =>
+                            dog.name.toLowerCase() === routeProps.match.params.name.toLowerCase())}
+                        {...routeProps} />} />
 
                 <Route render={() => <h1>404 not found</h1>} />
             </Switch>
@@ -18,3 +23,4 @@ class Routes extends Component {
 }
 
 export default Routes;
+

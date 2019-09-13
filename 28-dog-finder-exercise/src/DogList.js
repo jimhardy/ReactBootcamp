@@ -6,7 +6,7 @@ class DogList extends Component {
         return (
             <div>
                 <h1>ALL DOGS</h1>
-                {this.props.dogDetails.map(dog =>
+                {this.props.details.map(dog =>
                     (
                         <h1>{dog.name}</h1>
                     )
