@@ -15,7 +15,6 @@ class Routes extends Component {
                         this.props.dogs.filter(dog =>
                             dog.name.toLowerCase() === routeProps.match.params.name.toLowerCase())}
                         {...routeProps} />} />
-
                 <Route render={() => <h1>404 not found</h1>} />
             </Switch>
         );

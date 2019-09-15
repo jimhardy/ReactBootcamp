@@ -1,0 +1,34 @@
+.DogDetails {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    text-align: center;
+    margin: 10px 30vw;
+    background-color: rgba(200, 207, 214, 0.5);
+    border-radius: 3%;
+    color: rgb(15, 15, 15);
+}
+
+.DogDetails-content {
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 30vw;
+}
+
+.DogDetails-content2 {
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 30vw;
+}
+
+.DogDetails-facts {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.DogDetails img {
+    border-radius: 5%;
+}

@@ -1,0 +1,25 @@
+.Doglist {
+    display: inline-flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.Doglist-dog {
+    padding: 2em;
+    text-align: center;
+}
+
+.Doglist-dog {
+    text-decoration: none;
+}
+
+.Doglist img:hover {
+    opacity: 50%;
+}
+
+.Doglist img {
+    border-radius: 50%;
+    width: 20em;
+    height: 20em;
+    object-fit: cover;
+}

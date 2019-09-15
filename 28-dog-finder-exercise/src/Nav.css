@@ -1,0 +1,54 @@
+.Nav {
+    display: flex;
+    background-color: slategrey;
+    text-transform: uppercase;
+    font-weight: bold;
+    /* padding-bottom: 1rem; */
+    /* padding-top: 1rem; */
+    color: azure;
+}
+
+.Nav-header {
+    display: flex;
+    display: inline-flex;
+    font-size: 5rem;
+}
+
+.Nav-header:hover {
+    animation-name: spin;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(-10deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.Nav-link {
+    display: flex;
+    display: inline-flex;
+    text-decoration: none;
+    padding: 2rem;
+    color: azure;
+    /* margin: 0; */
+    /* margin-left: auto; */
+}
+
+.Nav-link:hover {
+    background-color: rgb(144, 155, 165);
+}
