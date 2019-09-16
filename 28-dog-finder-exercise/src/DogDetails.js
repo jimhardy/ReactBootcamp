@@ -11,16 +11,16 @@ class DogDetails extends Component {
 
         return (
             <div className='DogDetails'>
-                <div className='DogDetails-content'>
+                <div className='DogDetails-header'>
                     <h1>{dog.name}</h1>
-                    <div className='DogDetails-content2'>
-                        <img src={dog.src} alt={dog.name} />
-                        <h2>Age: {dog.age}</h2>
-                        <div className='DogDetails-facts'>
-                            {dog.facts.map((fact, idx) =>
-                                <h2 key={idx}>{fact}</h2>
-                            )}
-                        </div>
+                    <h2>Age: {dog.age}</h2>
+                </div>
+                <div className='DogDetails-content'>
+                    <img src={dog.src} alt={dog.name} />
+                    <div className='DogDetails-facts'>
+                        {dog.facts.map((fact, idx) =>
+                            <h2 key={idx}>{fact}</h2>
+                        )}
                     </div>
                 </div>
             </div >

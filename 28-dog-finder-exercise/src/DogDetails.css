@@ -1,7 +1,7 @@
 .DogDetails {
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 60vw;
     text-align: center;
     margin: 10px 30vw;
     background-color: rgba(200, 207, 214, 0.5);
@@ -9,26 +9,38 @@
     color: rgb(15, 15, 15);
 }
 
-.DogDetails-content {
+.DogDetails-header {
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
-    width: 30vw;
+    flex-direction: column;
+    /* width: 30vw; */
 }
 
-.DogDetails-content2 {
+.DogDetails-header h1 {
+    margin: 0;
+}
+
+.DogDetails-header h2 {
+    margin: 1rem;
+}
+
+.DogDetails-content {
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    width: 30vw;
+    /* width: 30vw; */
 }
 
 .DogDetails-facts {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    /* text-align:  */
+    padding: 1rem;
 }
 
 .DogDetails img {
     border-radius: 5%;
+    padding: 1rem;
 }

@@ -2,6 +2,14 @@
     display: inline-flex;
     justify-content: center;
     align-content: center;
+    width: 100%;
+}
+
+.Doglist a {
+    text-decoration: none;
+    color: rgb(46, 54, 61);
+    font-weight: 100;
+    letter-spacing: 4px;
 }
 
 .Doglist-dog {
