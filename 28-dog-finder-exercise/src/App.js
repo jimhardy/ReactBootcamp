@@ -37,16 +37,6 @@ class App extends Component {
           "Tubby loves eating food."
         ]
       },
-      {
-        name: "Tubby",
-        age: 4,
-        src: 'https://images.unsplash.com/photo-1505628346881-b72b27e84530?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
-        facts: [
-          "Tubby is not the brightest dog",
-          "Tubby does not like walks or exercise.",
-          "Tubby loves eating food."
-        ]
-      },
     ]
   };
   render() {

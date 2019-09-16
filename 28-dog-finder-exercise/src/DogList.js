@@ -10,7 +10,7 @@ class DogList extends Component {
                 {this.props.details.map(dog =>
                     (
                         <div className='Doglist-dog'>
-                            <Link to={`/dog/${dog.name}`}>
+                            <Link  to={`/dog/${dog.name}`}>
                                 <h1>{dog.name}</h1>
                                 <img src={dog.src} alt={dog.name} />
                             </Link>

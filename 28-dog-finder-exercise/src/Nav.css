@@ -49,6 +49,7 @@
     /* margin-left: auto; */
 }
 
-.Nav-link:hover {
+.Nav-link:hover,
+.Nav-active {
     background-color: rgb(144, 155, 165);
 }
