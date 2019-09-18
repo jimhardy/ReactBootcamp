@@ -11,6 +11,9 @@
 .Nav-header {
     display: flex;
     display: inline-flex;
+}
+
+.icon {
     font-size: 5rem;
 }
 

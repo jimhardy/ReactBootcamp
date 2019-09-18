@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Routes from "./Routes";
-import Nav from "./Nav";
+import DogFinderNavbar from "./Nav";
 
 import "./App.css";
 
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav dogs={this.props.dogs} />
+        <DogFinderNavbar dogs={this.props.dogs} />
         <div className='container'>
           <Routes dogs={this.props.dogs} />
         </div>
