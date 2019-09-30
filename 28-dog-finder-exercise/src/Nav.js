@@ -24,7 +24,7 @@ class DogFinderNavbar extends Component {
     render() {
         return (
             <div>
-                <Navbar className='Nav' color="dark" light expand="md">
+                <Navbar className='Nav' light expand="md">
                     <NavbarBrand className='Nav-header' href="/"><FontAwesomeIcon className='icon' icon={faDog} /></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>

@@ -11,6 +11,7 @@
 .Nav-header {
     display: flex;
     display: inline-flex;
+    color: azure;
 }
 
 .icon {

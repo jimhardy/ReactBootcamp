@@ -4,7 +4,6 @@
     width: 60vw;
     text-align: center;
     margin: 10px auto;
-    background-color: rgba(200, 207, 214, 0.5);
     border-radius: 3%;
     color: rgb(15, 15, 15);
 }
@@ -21,7 +20,7 @@
     margin: 0;
 }
 
-.DogDetails-header h2 {
+.DogDetails-header h3 {
     margin: 1rem;
 }
 

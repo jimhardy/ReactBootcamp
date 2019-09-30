@@ -8,10 +8,10 @@ class DogList extends Component {
     render() {
         return (
             <Row className='Doglist'>
-                {this.props.details.map(dog =>
+                {this.props.details.map((dog, idx) =>
                     (
-                        <Col className='Doglist-dog'>
-                            <Link to={`/dog/${dog.name}`}>
+                        <Col className='Doglist-dog' key={idx} >
+                            <Link to={`/dog/${dog.name}`} className='underline'>
                                 <img src={dog.src} alt={dog.name} />
                                 <h1>{dog.name}</h1>
                             </Link>

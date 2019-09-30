@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import DogList from './DogList';
 import DogDetails from './DogDetails';
 
@@ -15,6 +15,7 @@ class Routes extends Component {
                         this.props.dogs.filter(dog =>
                             dog.name.toLowerCase() === routeProps.match.params.name.toLowerCase())}
                         {...routeProps} />} />
+                <Redirect to='/' />
                 <Route render={() => <h1>404 not found</h1>} />
             </Switch>
         );

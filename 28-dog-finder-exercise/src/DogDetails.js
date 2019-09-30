@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './DogDetails.css';
+import { Col, Row, Card, Container } from 'reactstrap';
 
 
 class DogDetails extends Component {
@@ -10,20 +11,25 @@ class DogDetails extends Component {
         if (!dog) this.props.history.goBack();
 
         return (
-            <div className='DogDetails'>
-                <div className='DogDetails-header'>
-                    <h1>{dog.name}</h1>
-                    <h2>Age: {dog.age}</h2>
-                </div>
-                <div className='DogDetails-content'>
-                    <img src={dog.src} alt={dog.name} />
-                    <div className='DogDetails-facts'>
-                        {dog.facts.map((fact, idx) =>
-                            <h2 key={idx}>{fact}</h2>
-                        )}
-                    </div>
-                </div>
-            </div >
+            <Container>
+                <Card className='DogDetails'>
+                    <Col>
+                        <Row className='DogDetails-header'>
+                            <h1 className='card-title'>{dog.name}</h1>
+                            <h3 className='card-subtitle text-muted' >Age: {dog.age}</h3>
+                        </Row>
+                        <Col className='DogDetails-content'>
+                            <img src={dog.src} alt={dog.name} />
+                            <Col className='DogDetails-facts'>
+                                {dog.facts.map((fact, idx) =>
+                                    <h3 key={idx}>{fact}</h3>
+                                )}
+                            </Col>
+                        </Col>
+                    </Col>
+                    <Link className='btn btn-info' to='/'>Go Back</Link>
+                </Card >
+            </Container>
         );
     }
 }
