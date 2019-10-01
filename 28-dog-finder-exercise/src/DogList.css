@@ -26,10 +26,10 @@
     width: 0%;
     height: 4px;
     display: block;
-    background-color: #fff;
+    background-color: rgb(29, 29, 29);
     content: '';
     position: absolute;
-    top: 34px;
+    top: 300px;
     left: 50%;
     transition: left 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
         width 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -37,7 +37,7 @@
 
 .Doglist-dog:hover .underline::after {
     width: 100%;
-    top: 34px;
+    top: 300px;
     left: 0;
 }
 
@@ -65,9 +65,10 @@
 
 .Doglist img {
     border-radius: 50%;
-    width: 20em;
-    height: 20em;
+    width: 10em;
+    height: 10em;
     object-fit: cover;
     filter: grayscale();
+    transition: 0.4s ease;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 }
