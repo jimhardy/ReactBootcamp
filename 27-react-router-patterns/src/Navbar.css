@@ -1,0 +1,6 @@
+.Navbar {
+    background-color: slategrey;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
