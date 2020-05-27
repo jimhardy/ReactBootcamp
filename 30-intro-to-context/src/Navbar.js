@@ -7,26 +7,40 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
+import styles from './styles/NavBarStyles';
 
 class Navbar extends Component {
-  render() {
-    return (
-      <div className={classes.root}>
-        <Appbar position="static" color="primary">
-          <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit">
-              <span>🇷</span>
-            </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit">
-              App Title
-            </Typography>
-            <Switch />
-            <div className={classes.grow} />
-          </Toolbar>
-        </Appbar>
-      </div>
-    );
-  }
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <Appbar position="static" color="primary">
+                    <Toolbar>
+                        <IconButton
+                            className={classes.menuButton}
+                            color="inherit"
+                        >
+                            <span>🍟</span>
+                        </IconButton>
+                        <Typography
+                            className={classes.title}
+                            variant="h6"
+                            color="inherit"
+                        >
+                            App Title
+                        </Typography>
+                        <Switch />
+                        <div className={classes.grow} />
+                        <div className={classes.search}>
+                            <div className={classes.searchIcon}>
+                                <SearchIcon />
+                            </div>
+                        </div>
+                    </Toolbar>
+                </Appbar>
+            </div>
+        );
+    }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
