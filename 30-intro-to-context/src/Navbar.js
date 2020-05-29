@@ -35,6 +35,13 @@ class Navbar extends Component {
                             <div className={classes.searchIcon}>
                                 <SearchIcon />
                             </div>
+                            <InputBase
+                                placeholder="Search..."
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                            />
                         </div>
                     </Toolbar>
                 </Appbar>
