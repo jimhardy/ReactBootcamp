@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlinedIcon';
+import LockOutlinedIcon from '@material-ui/icons/Lock';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,7 +17,27 @@ import styles from './styles/FormStyles';
 class Form extends Component {
     render() {
         const { classes } = this.props;
-        return <main className={classes.main}></main>;
+        return (
+            <main className={classes.main}>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography variant="h5">Sign In</Typography>
+                    <Select>
+                        <MenuItem>English</MenuItem>
+                        <MenuItem>French</MenuItem>
+                        <MenuItem>Spanish</MenuItem>
+                    </Select>
+                    <form className={classes.form}>
+                        <FormControl margin='normal' require fullWidth>
+                            <InputLabel htmlFor='email'>Email</InputLabel>
+                            <Input id='email' name='email' autoFocus />
+                        </FormControl>
+                    </form>
+                </Paper>
+            </main>
+        );
     }
 }
 
