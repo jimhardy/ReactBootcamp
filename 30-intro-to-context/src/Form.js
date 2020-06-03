@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import withStyles from '@material-ui/core/styles/withStyles';
 import styles from './styles/FormStyles';
+import { FormControlLabel } from '@material-ui/core';
 
 class Form extends Component {
     render() {
@@ -24,16 +25,22 @@ class Form extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography variant="h5">Sign In</Typography>
-                    <Select>
-                        <MenuItem>English</MenuItem>
-                        <MenuItem>French</MenuItem>
-                        <MenuItem>Spanish</MenuItem>
+                    <Select value='english'>
+                        <MenuItem value='english'>English</MenuItem>
+                        <MenuItem value='french'>French</MenuItem>
+                        <MenuItem value='spanish'>Spanish</MenuItem>
                     </Select>
                     <form className={classes.form}>
-                        <FormControl margin='normal' require fullWidth>
-                            <InputLabel htmlFor='email'>Email</InputLabel>
-                            <Input id='email' name='email' autoFocus />
+                        <FormControl margin="normal" require fullWidth>
+                            <InputLabel htmlFor="email">Email</InputLabel>
+                            <Input id="email" name="email" autoFocus />
                         </FormControl>
+                        <FormControl margin="normal" require fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input id="password" name="password" autoFocus />
+                        </FormControl>
+                        <FormControlLabel control={<Checkbox color='primary' />} labnel='Remember Me' />
+                        <Button variant='contained' type='submit' fullWidth color='primary' className={classes.submit} >Sign In</Button>
                     </form>
                 </Paper>
             </main>
